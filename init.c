@@ -67,6 +67,12 @@ class CustomMission: MissionServer
 				itemBs.SetQuantity(4);
 		}
 	}
+
+    override void HandleBody(PlayerBase player)
+    {
+        // Kill character so they start fresh every time they connect
+        player.SetHealth("", "", 0.0);
+    }
 };
 
 Mission CreateCustomMission(string path)
