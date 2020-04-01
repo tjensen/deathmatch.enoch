@@ -41,15 +41,6 @@ void main()
 
 class CustomMission: MissionServer
 {
-	void SetRandomHealth(EntityAI itemEnt)
-	{
-		if ( itemEnt )
-		{
-			int rndHlt = Math.RandomInt(55,100);
-			itemEnt.SetHealth("","",rndHlt);
-		}
-	}
-
 	override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
 	{
 		Entity playerEnt;
@@ -66,7 +57,6 @@ class CustomMission: MissionServer
 		EntityAI itemTop;
 		EntityAI itemEnt;
 		ItemBase itemBs;
-		float rand;
 
 		itemTop = player.FindAttachmentBySlotName("Body");
 
@@ -75,13 +65,6 @@ class CustomMission: MissionServer
 			itemEnt = itemTop.GetInventory().CreateInInventory("Rag");
 			if ( Class.CastTo(itemBs, itemEnt ) )
 				itemBs.SetQuantity(4);
-
-			SetRandomHealth(itemEnt);
-
-			string chemlightArray[] = { "Chemlight_White", "Chemlight_Yellow", "Chemlight_Green", "Chemlight_Red" };
-			int rndIndex = Math.RandomInt(0, 4);
-			itemEnt = itemTop.GetInventory().CreateInInventory(chemlightArray[rndIndex]);
-			SetRandomHealth(itemEnt);
 		}
 	}
 };
