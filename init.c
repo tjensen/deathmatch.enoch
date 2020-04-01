@@ -65,6 +65,8 @@ class CustomMission: MissionServer
 			itemEnt = itemTop.GetInventory().CreateInInventory("Rag");
 			if ( Class.CastTo(itemBs, itemEnt ) )
 				itemBs.SetQuantity(4);
+
+            itemTop.GetInventory().CreateInInventory("TacticalBaconCan_Opened");
 		}
 	}
 
