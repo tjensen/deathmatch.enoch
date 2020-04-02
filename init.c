@@ -73,6 +73,7 @@ class CustomMission: MissionServer
                 itemBs.SetQuantity(4);
 
             itemTop.GetInventory().CreateInInventory("TacticalBaconCan_Opened");
+            itemTop.GetInventory().CreateInInventory("WaterBottle");
         }
 
         StartFedAndWatered(player);
