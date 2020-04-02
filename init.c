@@ -52,6 +52,12 @@ class CustomMission: MissionServer
 		return m_player;
 	}
 
+    void StartFedAndWatered(PlayerBase player)
+    {
+        player.GetStatWater().Set(player.GetStatWater().GetMax());
+        player.GetStatEnergy().Set(player.GetStatEnergy().GetMax());
+    }
+
 	override void StartingEquipSetup(PlayerBase player, bool clothesChosen)
 	{
 		EntityAI itemTop;
@@ -68,6 +74,8 @@ class CustomMission: MissionServer
 
             itemTop.GetInventory().CreateInInventory("TacticalBaconCan_Opened");
 		}
+
+        StartFedAndWatered(player);
 	}
 
     override void HandleBody(PlayerBase player)
