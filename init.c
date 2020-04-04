@@ -41,6 +41,9 @@ void main()
 
 class CustomMission: MissionServer
 {
+    ref array<string> MP5Handguards = {"MP5_PlasticHndgrd", "MP5_RailHndgrd"};
+    ref array<string> Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
+
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
     {
         Entity playerEnt;
@@ -56,6 +59,50 @@ class CustomMission: MissionServer
     {
         player.GetStatWater().Set(player.GetStatWater().GetMax());
         player.GetStatEnergy().Set(player.GetStatEnergy().GetMax());
+    }
+
+    EntityAI EquipMP5InHands(HumanInventory inventory)
+    {
+        EntityAI mp5 = inventory.CreateInHands("MP5K");
+        GameInventory mp5Inv = mp5.GetInventory();
+        mp5Inv.CreateAttachment("ACOGOptic");
+        mp5Inv.CreateAttachment(MP5Handguards.GetRandomElement());
+        mp5Inv.CreateAttachment("MP5k_StockBttstck");
+
+        inventory.CreateInInventory("Mag_MP5_30Rnd");
+        inventory.CreateInInventory("Mag_MP5_30Rnd");
+        inventory.CreateInInventory("Mag_MP5_30Rnd");
+
+        return mp5;
+    }
+
+    EntityAI EquipWinchester(HumanInventory inventory)
+    {
+        EntityAI winchester = inventory.CreateInInventory("Winchester70");
+        winchester.GetInventory().CreateAttachment("HuntingOptic");
+
+        inventory.CreateInInventory("Ammo_308Win");
+        inventory.CreateInInventory("Ammo_308Win");
+        inventory.CreateInInventory("Ammo_308Win");
+
+        return winchester;
+    }
+
+    EntityAI EquipKnife(HumanInventory inventory)
+    {
+        return inventory.CreateInInventory(Knives.GetRandomElement());
+    }
+
+    void EquipPlayerWeapons(PlayerBase player)
+    {
+        HumanInventory inventory = player.GetHumanInventory();
+        EntityAI primary = EquipMP5InHands(inventory);
+        EntityAI secondary = EquipWinchester(inventory);
+        EntityAI melee = EquipKnife(inventory);
+
+        player.SetQuickBarEntityShortcut(primary, 0);
+        player.SetQuickBarEntityShortcut(secondary, 1);
+        player.SetQuickBarEntityShortcut(melee, 2);
     }
 
     override void StartingEquipSetup(PlayerBase player, bool clothesChosen)
@@ -75,6 +122,8 @@ class CustomMission: MissionServer
             itemTop.GetInventory().CreateInInventory("TacticalBaconCan_Opened");
             itemTop.GetInventory().CreateInInventory("WaterBottle");
         }
+
+        EquipPlayerWeapons(player);
 
         StartFedAndWatered(player);
     }
