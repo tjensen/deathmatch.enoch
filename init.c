@@ -5,13 +5,13 @@ void main()
 
     weather.MissionWeather(false);    // false = use weather controller from Weather.c
 
-    weather.GetOvercast().Set( Math.RandomFloatInclusive(0.02, 0.1), 1, 0);
-    weather.GetRain().Set( 0, 1, 0);
-    weather.GetFog().Set( 0, 1, 0);
+    weather.GetOvercast().Set(Math.RandomFloatInclusive(0.02, 0.1), 1, 0);
+    weather.GetRain().Set(0, 1, 0);
+    weather.GetFog().Set(0, 1, 0);
 
     //INIT ECONOMY--------------------------------------
     Hive ce = CreateHive();
-    if ( ce )
+    if (ce)
         ce.InitOffline();
 
     //DATE RESET AFTER ECONOMY INIT-------------------------
@@ -66,10 +66,10 @@ class CustomMission: MissionServer
 
         itemTop = player.FindAttachmentBySlotName("Body");
 
-        if ( itemTop )
+        if (itemTop)
         {
             itemEnt = itemTop.GetInventory().CreateInInventory("Rag");
-            if ( Class.CastTo(itemBs, itemEnt ) )
+            if (Class.CastTo(itemBs, itemEnt))
                 itemBs.SetQuantity(4);
 
             itemTop.GetInventory().CreateInInventory("TacticalBaconCan_Opened");
