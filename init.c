@@ -1,3 +1,17 @@
+void SpawnCrate()
+{
+    vector position = "7332.09 295.65 2667.92";
+    ItemBase chest = ItemBase.Cast(GetGame().CreateObject("SeaChest", position, false, false, false));
+    Magazine magazine;
+
+    chest.SetPosition(position);
+    chest.GetInventory().CreateInInventory("VSS");
+    magazine = Magazine.Cast(chest.GetInventory().CreateInInventory("Mag_VSS_10Rnd"));
+    magazine.ServerSetAmmoCount(0);
+    chest.GetInventory().CreateInInventory("AmmoBox_9x39AP_20Rnd");
+    chest.GetInventory().CreateInInventory("AmmoBox_9x39AP_20Rnd");
+}
+
 void main()
 {
     //INIT WEATHER BEFORE ECONOMY INIT------------------------
@@ -37,6 +51,8 @@ void main()
             }
         }
     }
+
+    SpawnCrate();
 }
 
 class CustomMission: MissionServer
