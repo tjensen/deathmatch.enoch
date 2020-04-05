@@ -6,8 +6,8 @@ No client-side mods are required to play.
 ## Installation Instructions
 
 Install the `deathMatch.enoch` folder (the contents of this Git repository) in
-your `DayZServer\mpmissions` folder. If DayZ server was installed from the
-Steam application, the `mpmissions` folder is typically located at:
+your `DayZServer\mpmissions` folder. If DayZ server was installed using the
+Steam Windows application, the `mpmissions` folder is typically located at:
 
 ```
 C:\Program Files (x86)\Steam\steamapps\common\DayZServer\mpmissions
@@ -28,7 +28,7 @@ class Missions
 ## Recommended Server Settings
 
 Players do not spawn with light sources or night vision, so setting the server
-time is recommended to avoid frustrating players. For example:
+time is recommended to avoid frustrating players with darkness. For example:
 
 ```
 serverTime="2020/4/1/08/00";
