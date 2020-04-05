@@ -99,16 +99,15 @@ class CustomMission: MissionServer
         return m_player;
     }
 
-    void EquipPlayerClothes(PlayerBase player)
+    EntityAI EquipPlayerClothes(PlayerBase player)
     {
         HumanInventory inventory = player.GetHumanInventory();
         inventory.CreateInInventory(Tops.GetRandomElement());
         inventory.CreateInInventory(Bottoms.GetRandomElement());
         inventory.CreateInInventory(Shoes.GetRandomElement());
         inventory.CreateInInventory(Vests.GetRandomElement());
-        inventory.CreateInInventory(Belts.GetRandomElement());
-        inventory.CreateInInventory("NylonKnifeSheath");
-        // TODO: Put knife in sheath and put sheath in belt
+        EntityAI belt = inventory.CreateInInventory(Belts.GetRandomElement());
+        return belt.GetInventory().CreateAttachment("NylonKnifeSheath");
     }
 
     void EquipPlayerForSurvival(PlayerBase player)
@@ -217,17 +216,17 @@ class CustomMission: MissionServer
         return weapon;
     }
 
-    EntityAI EquipKnife(HumanInventory inventory)
+    EntityAI EquipKnifeInSheath(EntityAI sheath)
     {
-        return inventory.CreateInInventory(Knives.GetRandomElement());
+        return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
     }
 
-    void EquipPlayerWeapons(PlayerBase player)
+    void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
     {
         HumanInventory inventory = player.GetHumanInventory();
         EntityAI primary = EquipPrimaryWeaponInHands(inventory);
         EntityAI secondary = EquipSecondaryWeapon(inventory);
-        EntityAI melee = EquipKnife(inventory);
+        EntityAI melee = EquipKnifeInSheath(sheath);
 
         player.SetQuickBarEntityShortcut(primary, 0);
         player.SetQuickBarEntityShortcut(secondary, 1);
@@ -244,9 +243,9 @@ class CustomMission: MissionServer
     {
         player.RemoveAllItems();
 
-        EquipPlayerClothes(player);
+        EntityAI sheath = EquipPlayerClothes(player);
         EquipPlayerForSurvival(player);
-        EquipPlayerWeapons(player);
+        EquipPlayerWeapons(player, sheath);
         StartFedAndWatered(player);
     }
 
