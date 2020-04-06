@@ -5,7 +5,7 @@ No client-side mods are required to play.
 
 ## Installation Instructions
 
-Install the `deathMatch.enoch` folder (the contents of this Git repository) in
+Install the `deathmatch.enoch` folder (the contents of this Git repository) in
 your `DayZServer\mpmissions` folder. If DayZ server was installed using the
 Steam Windows application, the `mpmissions` folder is typically located at:
 
@@ -13,7 +13,7 @@ Steam Windows application, the `mpmissions` folder is typically located at:
 C:\Program Files (x86)\Steam\steamapps\common\DayZServer\mpmissions
 ```
 
-Edit the DayZ server configuration file (typically `serverDZ.cfg`) to load the `deathMatch.enoch` mission:
+Edit the DayZ server configuration file (typically `serverDZ.cfg`) to load the `deathmatch.enoch` mission:
 
 ```
 class Missions
