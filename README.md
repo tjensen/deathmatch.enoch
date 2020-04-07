@@ -3,6 +3,10 @@
 This is a DayZ mission for running a deathmatch server on the Livonia DLC map.
 No client-side mods are required to play.
 
+* [Installation Instructions](#installation-instructions)
+* [Recommended Server Settings](#recommended-server-settings)
+* [Design Requirements](#design-requirements)
+
 ## Installation Instructions
 
 Install the `deathmatch.enoch` folder (the contents of this Git repository) in
