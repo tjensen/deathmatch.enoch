@@ -88,6 +88,7 @@ class CustomMission: MissionServer
     ref array<string> M4Buttstocks = {"M4_CQBBttstck", "M4_MPBttstck", "M4_OEBttstck"};
     ref array<string> Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
     ref array<string> NATOPrimaryOptics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
+    ref array<string> Shotguns = {"Izh43Shotgun", "Mp133Shotgun"};
 
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
     {
@@ -169,11 +170,34 @@ class CustomMission: MissionServer
         return m4a1;
     }
 
+    EntityAI EquipShotgunInHands(HumanInventory inventory)
+    {
+        EntityAI shotgun = inventory.CreateInHands(Shotguns.GetRandomElement());
+
+        inventory.CreateInInventory("Ammo_12gaPellets");
+        inventory.CreateInInventory("Ammo_12gaPellets");
+        inventory.CreateInInventory("Ammo_12gaPellets");
+
+        return shotgun;
+    }
+
+    EntityAI EquipSaigaInHands(HumanInventory inventory)
+    {
+        EntityAI saiga = inventory.CreateInHands("Saiga");
+        saiga.GetInventory().CreateAttachment("Saiga_Bttstck");
+
+        inventory.CreateInInventory("Mag_Saiga_8Rnd");
+        inventory.CreateInInventory("Mag_Saiga_8Rnd");
+        inventory.CreateInInventory("Mag_Saiga_8Rnd");
+
+        return saiga;
+    }
+
     EntityAI EquipPrimaryWeaponInHands(HumanInventory inventory)
     {
         EntityAI weapon;
 
-        switch (Math.RandomInt(0, 3)) {
+        switch (Math.RandomInt(0, 5)) {
             case 0:
                 weapon = EquipMP5InHands(inventory);
                 break;
@@ -182,6 +206,12 @@ class CustomMission: MissionServer
                 break;
             case 2:
                 weapon = EquipM4A1InHands(inventory);
+                break;
+            case 3:
+                weapon = EquipShotgunInHands(inventory);
+                break;
+            case 4:
+                weapon = EquipSaigaInHands(inventory);
                 break;
         }
 
