@@ -87,6 +87,7 @@ class CustomMission: MissionServer
     ref array<string> M4Handguards = {"M4_MPHndgrd", "M4_PlasticHndgrd", "M4_RISHndgrd"};
     ref array<string> M4Buttstocks = {"M4_CQBBttstck", "M4_MPBttstck", "M4_OEBttstck"};
     ref array<string> Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
+    ref array<string> NATOPrimaryOptics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
 
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
     {
@@ -120,11 +121,17 @@ class CustomMission: MissionServer
         player.SetQuickBarEntityShortcut(bandage, 3);
     }
 
+    void AttachNATOPrimaryOpticWithBattery(GameInventory smgInventory)
+    {
+        EntityAI optic = smgInventory.CreateAttachment(NATOPrimaryOptics.GetRandomElement());
+        optic.GetInventory().CreateAttachment("Battery9V");
+    }
+
     EntityAI EquipMP5InHands(HumanInventory inventory)
     {
         EntityAI mp5 = inventory.CreateInHands("MP5K");
         GameInventory mp5Inv = mp5.GetInventory();
-        mp5Inv.CreateAttachment("ACOGOptic");
+        AttachNATOPrimaryOpticWithBattery(mp5Inv);
         mp5Inv.CreateAttachment(MP5Handguards.GetRandomElement());
         mp5Inv.CreateAttachment("MP5k_StockBttstck");
 
@@ -138,8 +145,7 @@ class CustomMission: MissionServer
     EntityAI EquipUMPInHands(HumanInventory inventory)
     {
         EntityAI ump = inventory.CreateInHands("UMP45");
-        GameInventory umpInv = ump.GetInventory();
-        umpInv.CreateAttachment("ACOGOptic");
+        AttachNATOPrimaryOpticWithBattery(ump.GetInventory());
 
         inventory.CreateInInventory("Mag_UMP_25Rnd");
         inventory.CreateInInventory("Mag_UMP_25Rnd");
@@ -152,7 +158,7 @@ class CustomMission: MissionServer
     {
         EntityAI m4a1 = inventory.CreateInHands("M4A1");
         GameInventory m4a1Inv = m4a1.GetInventory();
-        m4a1Inv.CreateAttachment("ACOGOptic");
+        AttachNATOPrimaryOpticWithBattery(m4a1Inv);
         m4a1Inv.CreateAttachment(M4Handguards.GetRandomElement());
         m4a1Inv.CreateAttachment(M4Buttstocks.GetRandomElement());
 
