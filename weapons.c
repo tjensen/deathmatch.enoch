@@ -50,13 +50,15 @@ class RangedWeapon
 
 class FixedRangedWeapon extends RangedWeapon
 {
-    string m_name;
-    string m_ammunition;
-    string m_optic;
-    string m_handguard;
-    string m_buttstock;
+    private string m_name;
+    private string m_ammunition;
+    private string m_optic;
+    private string m_handguard;
+    private string m_buttstock;
 
-    void Init(string name, string ammunition, string optic = "", string handguard = "", string buttstock = "")
+    void Init(
+        string name, string ammunition, string optic = "", string handguard = "",
+        string buttstock = "")
     {
         m_name = name;
         m_ammunition = ammunition;
@@ -186,10 +188,10 @@ class SKS extends FixedRangedWeapon
 
 class MP5 extends RandomRangedWeapon
 {
-    static ref TStringArray Names = {"MP5K"};
-    static ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
-    static ref TStringArray Handguards = {"MP5_PlasticHndgrd", "MP5_RailHndgrd"};
-    static ref TStringArray Buttstocks = {"MP5k_StockBttstck"};
+    static private ref TStringArray Names = {"MP5K"};
+    static private ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
+    static private ref TStringArray Handguards = {"MP5_PlasticHndgrd", "MP5_RailHndgrd"};
+    static private ref TStringArray Buttstocks = {"MP5k_StockBttstck"};
 
     void MP5()
     {
@@ -200,8 +202,8 @@ class MP5 extends RandomRangedWeapon
 
 class UMP extends RandomRangedWeapon
 {
-    static ref TStringArray Names = {"UMP45"};
-    static ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
+    static private ref TStringArray Names = {"UMP45"};
+    static private ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
 
     void UMP()
     {
@@ -212,10 +214,12 @@ class UMP extends RandomRangedWeapon
 
 class M4A1 extends RandomRangedWeapon
 {
-    static ref TStringArray Names = {"M4A1"};
-    static ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
-    static ref TStringArray Handguards = {"M4_MPHndgrd", "M4_PlasticHndgrd", "M4_RISHndgrd"};
-    static ref TStringArray Buttstocks = {"M4_CQBBttstck", "M4_MPBttstck", "M4_OEBttstck"};
+    static private ref TStringArray Names = {"M4A1"};
+    static private ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
+    static private ref TStringArray Handguards = {
+        "M4_MPHndgrd", "M4_PlasticHndgrd", "M4_RISHndgrd"
+    };
+    static private ref TStringArray Buttstocks = {"M4_CQBBttstck", "M4_MPBttstck", "M4_OEBttstck"};
 
     void M4A1()
     {
@@ -226,7 +230,7 @@ class M4A1 extends RandomRangedWeapon
 
 class Shotgun extends RandomRangedWeapon
 {
-    static ref TStringArray Names = {"Izh43Shotgun", "Mp133Shotgun"};
+    static private ref TStringArray Names = {"Izh43Shotgun", "Mp133Shotgun"};
 
     void Shotgun()
     {
@@ -246,9 +250,12 @@ class Vaiga extends FixedRangedWeapon
 
 class Weapons
 {
-    autoptr array<ref RangedWeapon> PrimaryWeapons = new array<ref RangedWeapon>();
-    autoptr array<ref RangedWeapon> SecondaryWeapons = new array<ref RangedWeapon>();
-    ref TStringArray Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
+    static private ref TStringArray Knives = {
+        "CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"
+    };
+
+    private autoptr array<ref RangedWeapon> PrimaryWeapons = new array<ref RangedWeapon>();
+    private autoptr array<ref RangedWeapon> SecondaryWeapons = new array<ref RangedWeapon>();
 
     void Weapons()
     {
