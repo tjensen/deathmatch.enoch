@@ -242,3 +242,52 @@ class Vaiga extends FixedRangedWeapon
         Init("Saiga", "Mag_Saiga_8Rnd", "", "", "Saiga_Bttstck");
     }
 }
+
+
+class Weapons
+{
+    autoptr array<ref RangedWeapon> PrimaryWeapons = new array<ref RangedWeapon>();
+    autoptr array<ref RangedWeapon> SecondaryWeapons = new array<ref RangedWeapon>();
+    ref TStringArray Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
+
+    void Weapons()
+    {
+        PrimaryWeapons.Insert(new MP5());
+        PrimaryWeapons.Insert(new UMP());
+        PrimaryWeapons.Insert(new M4A1());
+        PrimaryWeapons.Insert(new Shotgun());
+        PrimaryWeapons.Insert(new Vaiga());
+
+        SecondaryWeapons.Insert(new Winchester());
+        SecondaryWeapons.Insert(new Blaze());
+        SecondaryWeapons.Insert(new Mosin());
+        SecondaryWeapons.Insert(new SKS());
+    }
+
+    void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
+    {
+        HumanInventory inventory = player.GetHumanInventory();
+        EntityAI primary = EquipPrimaryWeaponInHands(inventory);
+        EntityAI secondary = EquipSecondaryWeapon(inventory);
+        EntityAI melee = EquipKnifeInSheath(sheath);
+
+        player.SetQuickBarEntityShortcut(primary, 0);
+        player.SetQuickBarEntityShortcut(secondary, 1);
+        player.SetQuickBarEntityShortcut(melee, 2);
+    }
+
+    private EntityAI EquipPrimaryWeaponInHands(HumanInventory inventory)
+    {
+        return PrimaryWeapons.GetRandomElement().CreateInHands(inventory);
+    }
+
+    private EntityAI EquipSecondaryWeapon(HumanInventory inventory)
+    {
+        return SecondaryWeapons.GetRandomElement().CreateInInventory(inventory);
+    }
+
+    private EntityAI EquipKnifeInSheath(EntityAI sheath)
+    {
+        return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
+    }
+}

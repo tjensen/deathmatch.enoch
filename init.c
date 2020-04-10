@@ -86,23 +86,7 @@ class CustomMission: MissionServer
         "UKAssVest_Khaki", "UKAssVest_Olive"
     };
     ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
-    ref TStringArray Knives = {"CombatKnife", "HuntingKnife", "KitchenKnife", "SteakKnife"};
-    autoptr array<ref RangedWeapon> PrimaryWeapons = new array<ref RangedWeapon>();
-    autoptr array<ref RangedWeapon> SecondaryWeapons = new array<ref RangedWeapon>();
-
-    void CustomMission()
-    {
-        PrimaryWeapons.Insert(new MP5());
-        PrimaryWeapons.Insert(new UMP());
-        PrimaryWeapons.Insert(new M4A1());
-        PrimaryWeapons.Insert(new Shotgun());
-        PrimaryWeapons.Insert(new Vaiga());
-
-        SecondaryWeapons.Insert(new Winchester());
-        SecondaryWeapons.Insert(new Blaze());
-        SecondaryWeapons.Insert(new Mosin());
-        SecondaryWeapons.Insert(new SKS());
-    }
+    autoptr Weapons weapons = new Weapons();
 
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
     {
@@ -136,33 +120,6 @@ class CustomMission: MissionServer
         player.SetQuickBarEntityShortcut(bandage, 3);
     }
 
-    EntityAI EquipPrimaryWeaponInHands(HumanInventory inventory)
-    {
-        return PrimaryWeapons.GetRandomElement().CreateInHands(inventory);
-    }
-
-    EntityAI EquipSecondaryWeapon(HumanInventory inventory)
-    {
-        return SecondaryWeapons.GetRandomElement().CreateInInventory(inventory);
-    }
-
-    EntityAI EquipKnifeInSheath(EntityAI sheath)
-    {
-        return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
-    }
-
-    void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
-    {
-        HumanInventory inventory = player.GetHumanInventory();
-        EntityAI primary = EquipPrimaryWeaponInHands(inventory);
-        EntityAI secondary = EquipSecondaryWeapon(inventory);
-        EntityAI melee = EquipKnifeInSheath(sheath);
-
-        player.SetQuickBarEntityShortcut(primary, 0);
-        player.SetQuickBarEntityShortcut(secondary, 1);
-        player.SetQuickBarEntityShortcut(melee, 2);
-    }
-
     void StartFedAndWatered(PlayerBase player)
     {
         player.GetStatWater().Set(player.GetStatWater().GetMax());
@@ -175,7 +132,7 @@ class CustomMission: MissionServer
 
         EntityAI sheath = EquipPlayerClothes(player);
         EquipPlayerForSurvival(player);
-        EquipPlayerWeapons(player, sheath);
+        weapons.EquipPlayerWeapons(player, sheath);
         StartFedAndWatered(player);
     }
 
