@@ -1,3 +1,4 @@
+#include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\clothes.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\weapons.c"
 
 
@@ -60,32 +61,7 @@ void main()
 
 class CustomMission: MissionServer
 {
-    ref TStringArray Tops = {
-        "BDUJacket", "Blouse_Green", "BomberJacket_Black", "BomberJacket_Brown",
-        "BomberJacket_Olive", "DenimJacket", "HikingJacket_Black", "HikingJacket_Green",
-        "Hoodie_Black", "Hoodie_Brown", "Hoodie_Green", "HuntingJacket_Brown",
-        "HuntingJacket_Summer", "LabCoat", "M65Jacket_Black", "M65Jacket_Olive",
-        "ParamedicJacket_Green", "PrisonUniformJacket", "QuiltedJacket_Black",
-        "QuiltedJacket_Green", "TacticalShirt_Black", "TacticalShirt_Olive", "WoolCoat_Black"
-    };
-    ref TStringArray Bottoms = {
-        "BDUPants", "CargoPants_Black", "CargoPants_Green", "HunterPants_Brown",
-        "HunterPants_Summer", "Jeans_Black", "Jeans_Brown", "Jeans_Green", "ParamedicPants_Green",
-        "PrisonUniformPants", "ShortJeans_Black", "ShortJeans_Brown", "ShortJeans_Green"
-    };
-    ref TStringArray Shoes = {
-        "AthleticShoes_Black", "AthleticShoes_Brown", "AthleticShoes_Green", "CombatBoots_Beige",
-        "CombatBoots_Black", "CombatBoots_Brown", "CombatBoots_Green", "CombatBoots_Grey",
-        "HikingBoots_Black", "HikingBoots_Brown", "JungleBoots_Black", "JungleBoots_Brown",
-        "JungleBoots_Green", "JungleBoots_Olive", "MilitaryBoots_Black", "MilitaryBoots_Brown",
-        "Sneakers_Black", "Sneakers_Green", "Wellies_Black", "Wellies_Brown", "Wellies_Green",
-        "WorkingBoots_Brown", "WorkingBoots_Green"
-    };
-    ref TStringArray Vests = {
-        "PressVest_Blue", "PressVest_LightBlue", "UKAssVest_Black", "UKAssVest_Camo",
-        "UKAssVest_Khaki", "UKAssVest_Olive"
-    };
-    ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
+    autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
@@ -97,17 +73,6 @@ class CustomMission: MissionServer
         GetGame().SelectPlayer(identity, m_player);
 
         return m_player;
-    }
-
-    EntityAI EquipPlayerClothes(PlayerBase player)
-    {
-        HumanInventory inventory = player.GetHumanInventory();
-        inventory.CreateInInventory(Tops.GetRandomElement());
-        inventory.CreateInInventory(Bottoms.GetRandomElement());
-        inventory.CreateInInventory(Shoes.GetRandomElement());
-        inventory.CreateInInventory(Vests.GetRandomElement());
-        EntityAI belt = inventory.CreateInInventory(Belts.GetRandomElement());
-        return belt.GetInventory().CreateAttachment("NylonKnifeSheath");
     }
 
     void EquipPlayerForSurvival(PlayerBase player)
@@ -130,7 +95,7 @@ class CustomMission: MissionServer
     {
         player.RemoveAllItems();
 
-        EntityAI sheath = EquipPlayerClothes(player);
+        EntityAI sheath = clothes.EquipPlayerClothes(player);
         EquipPlayerForSurvival(player);
         weapons.EquipPlayerWeapons(player, sheath);
         StartFedAndWatered(player);
