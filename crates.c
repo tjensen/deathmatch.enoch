@@ -1,9 +1,7 @@
 class Crates
 {
-    static void SpawnCrates()
+    static void SpawnCrates(CGame game)
     {
-        CGame game = GetGame();
-
         SpawnWeaponCrate(game);
     }
 
@@ -24,3 +22,5 @@ class Crates
         chestInventory.CreateInInventory("AmmoBox_9x39AP_20Rnd");
     }
 }
+
+// vim:ft=cs

@@ -42,14 +42,126 @@ void main()
             }
         }
     }
-
-    Crates.SpawnCrates();
 }
 
-class CustomMission: MissionServer
+class CustomMission extends MissionServer
 {
+    static private int ROUND_DURATION = (20 * 60 * 1000);
+    static private int COUNTDOWN_DURATION = (10 * 1000);
+
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
+
+    void CustomMission()
+    {
+        this.StartRound();
+    }
+
+    private void EndRoundCountdown(int duration)
+    {
+        if (duration <= 0)
+        {
+            this.RestartRound();
+        }
+        else
+        {
+            int timeLeft = duration / 1000;
+            Print("Ending round in " + timeLeft + " " + GetGame().GetTime());
+            GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
+                    this.EndRoundCountdown, 1000, false, duration - 1000);
+        }
+    }
+
+    private void StartRound()
+    {
+        Print("Starting round");
+
+        CGame game = GetGame();
+
+        int delay = ROUND_DURATION - COUNTDOWN_DURATION;
+        Print("Starting countdown in " + delay);
+        game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
+                this.EndRoundCountdown,
+                delay,
+                false,
+                COUNTDOWN_DURATION);
+
+        Crates.SpawnCrates(game);
+
+        Print("Done");
+    }
+
+    private void EndRound()
+    {
+        Print("Ending round");
+
+        this.KillAllPlayers();
+
+        ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY);
+        queue.CallLater(this.CleanupObjects, 0, false);
+
+        Print("Done");
+    }
+
+    private void RestartRound()
+    {
+        this.EndRound();
+    }
+
+    private void KillAllPlayers()
+    {
+        array<Man> men = new array<Man>();
+        GetGame().GetPlayers(men);
+        foreach (Man man : men)
+        {
+            Print("Checking man " + man);
+            PlayerBase playerBase = PlayerBase.Cast(man);
+            if (playerBase != null)
+            {
+                Print("Killing player " + playerBase);
+                playerBase.ClearInventory();
+                playerBase.RemoveAllItems();
+                playerBase.SetHealth("", "", 0.0);
+            }
+        }
+    }
+
+    private void CleanupObjects()
+    {
+        Print("Cleaning up objects");
+        vector pos = "8000 0 8000";
+        array<Object> objects = new array<Object>();
+        array<CargoBase> cargos = new array<CargoBase>();
+        Print("Finding objects");
+        int start = GetGame().GetTime();
+        GetGame().GetObjectsAtPosition(pos, 11400, objects, cargos);
+        int end = GetGame().GetTime();
+        int delta = end - start;
+        Print("Done finding objects");
+        Print(" Start: " + start);
+        Print(" End: " + end);
+        Print(" Delta: " + delta);
+
+        foreach (Object obj : objects)
+        {
+            ItemBase itemBase = ItemBase.Cast(obj);
+            if (itemBase != null && itemBase.GetHierarchyParent() == null)
+            {
+                Print("Cleaning up object " + itemBase);
+                itemBase.Delete();
+            }
+
+            Man man = Man.Cast(obj);
+            if (man != null && man.GetIdentity() != null)
+            {
+                Print("Cleaning up corpse " + man);
+                man.Delete();
+            }
+        }
+        Print("Done cleaning up objects");
+
+        this.StartRound();
+    }
 
     override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
     {
@@ -83,13 +195,14 @@ class CustomMission: MissionServer
         player.RemoveAllItems();
 
         EntityAI sheath = clothes.EquipPlayerClothes(player);
-        EquipPlayerForSurvival(player);
+        this.EquipPlayerForSurvival(player);
         weapons.EquipPlayerWeapons(player, sheath);
-        StartFedAndWatered(player);
+        this.StartFedAndWatered(player);
     }
 
     override void HandleBody(PlayerBase player)
     {
+        player.DropAllItems();
         // Kill character so that players start fresh every time they connect
         player.SetHealth("", "", 0.0);
     }
@@ -99,3 +212,5 @@ Mission CreateCustomMission(string path)
 {
     return new CustomMission();
 }
+
+// vim:ft=cs
