@@ -97,10 +97,13 @@ class CustomMission extends MissionServer
     {
         Print("Ending round");
 
+        NotificationSystem.SendNotificationToPlayerIdentityExtended(
+                null, 1.0, "The round has ended!");
+
         this.KillAllPlayers();
 
         ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY);
-        queue.CallLater(this.CleanupObjects, 0, false);
+        queue.CallLater(this.CleanupObjects, 200, false);
 
         Print("Done");
     }
