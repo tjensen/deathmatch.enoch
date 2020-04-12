@@ -216,6 +216,22 @@ class UMP extends RandomRangedWeapon
     }
 }
 
+class KAS74U extends RandomRangedWeapon
+{
+    static private ref TStringArray Names = {"AKS74U", "AKS74U_Black", "AKS74U_Green"};
+    static private ref TStringArray Buttstocks = {
+        "AK_FoldingBttstck", "AK_FoldingBttstck_Black", "AK_FoldingBttstck_Green",
+        "AK_PlasticBttstck", "AK_PlasticBttstck_Black", "AK_PlasticBttstck_Green",
+        "AK_WoodBttstck"," AK_WoodBttstck_Black", "AK_WoodBttstck_Camo", "AK74_WoodBttstck",
+        "AKS74U_Bttstck"
+    };
+
+    void KAS74U()
+    {
+        Init(Names, "Mag_AK74_30Rnd", EMPTY, EMPTY, Buttstocks);
+    }
+}
+
 
 class M4A1 extends RandomRangedWeapon
 {
@@ -229,6 +245,60 @@ class M4A1 extends RandomRangedWeapon
     void M4A1()
     {
         Init(Names, "Mag_STANAG_30Rnd", Optics, Handguards, Buttstocks);
+    }
+}
+
+
+class AKWeapon extends RandomRangedWeapon
+{
+    static private ref TStringArray Optics = {"KobraOptic"};
+    static private ref TStringArray Handguards = {
+        "AK_PlasticHndgrd", "AK_RailHndgrd", "AK_RailHndgrd_Black", "AK_RailHndgrd_Green",
+        "AK_WoodHndgrd", "AK_WoodHndgrd_Black", "AK_WoodHndgrd_Camo", "AK74_Hndgrd"
+    };
+    static private ref TStringArray Buttstocks = {
+        "AK_FoldingBttstck", "AK_FoldingBttstck_Black", "AK_FoldingBttstck_Green",
+        "AK_PlasticBttstck", "AK_PlasticBttstck_Black", "AK_PlasticBttstck_Green",
+        "AK_WoodBttstck"," AK_WoodBttstck_Black", "AK_WoodBttstck_Camo", "AK74_WoodBttstck",
+        "AKS74U_Bttstck"
+    };
+
+    void InitAK(TStringArray names, string ammunition)
+    {
+        Init(names, ammunition, Optics, Handguards, Buttstocks);
+    }
+}
+
+
+class KA101 extends AKWeapon
+{
+    static private ref TStringArray Names = {"AK101", "AK101_Black", "AK101_Green"};
+
+    void KA101()
+    {
+        InitAK(Names, "Mag_AK101_30Rnd");
+    }
+}
+
+
+class KA74 extends AKWeapon
+{
+    static private ref TStringArray Names = {"AK74", "AK74_Black", "AK74_Green"};
+
+    void KA74()
+    {
+        InitAK(Names, "Mag_AK74_30Rnd");
+    }
+}
+
+
+class AKM extends AKWeapon
+{
+    static private ref TStringArray Names = {"AKM"};
+
+    void AKM()
+    {
+        InitAK(Names, "Mag_AKM_30Rnd");
     }
 }
 
@@ -266,7 +336,11 @@ class Weapons
     {
         PrimaryWeapons.Insert(new MP5());
         PrimaryWeapons.Insert(new UMP());
+        PrimaryWeapons.Insert(new KAS74U());
         PrimaryWeapons.Insert(new M4A1());
+        PrimaryWeapons.Insert(new KA101());
+        PrimaryWeapons.Insert(new KA74());
+        PrimaryWeapons.Insert(new AKM());
         PrimaryWeapons.Insert(new Shotgun());
         PrimaryWeapons.Insert(new Vaiga());
 
