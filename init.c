@@ -46,8 +46,8 @@ void main()
 
 class CustomMission extends MissionServer
 {
-    static private int ROUND_DURATION = (20 * 60 * 1000);
-    static private int COUNTDOWN_DURATION = (10 * 1000);
+    static private int DEFAULT_ROUND_DURATION = 30;
+    static private int COUNTDOWN_DURATION_MS = 10000;
 
     static private const vector LIMBO_POSITON = "7270.39 293.398 2923.94";
     static private const vector PLAYAREA_CENTER = "7451 0 2732";
@@ -58,8 +58,15 @@ class CustomMission extends MissionServer
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
+    int m_round_duration;
+
     void CustomMission()
     {
+        m_round_duration = GetGame().ServerConfigGetInt(
+                "deathmatchRoundMinutes");
+        if (m_round_duration < 1) m_round_duration = DEFAULT_ROUND_DURATION;
+        Print("Round duration: " + m_round_duration);
+
         GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                 this.CheckPlayerPositions, 10000, true);
 
@@ -125,13 +132,12 @@ class CustomMission extends MissionServer
 
         CGame game = GetGame();
 
-        int delay = ROUND_DURATION - COUNTDOWN_DURATION;
-        Print("Starting countdown in " + delay);
+        int delay = (m_round_duration * 60000) - COUNTDOWN_DURATION_MS;
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                 this.EndRoundCountdown,
                 delay,
                 false,
-                COUNTDOWN_DURATION);
+                COUNTDOWN_DURATION_MS);
 
         Crates.SpawnCrates(game);
 
