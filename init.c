@@ -152,7 +152,7 @@ class CustomMission extends MissionServer
             }
 
             Man man = Man.Cast(obj);
-            if (man != null && man.GetIdentity() != null)
+            if (man != null && man.GetIdentity() == null)
             {
                 Print("Cleaning up corpse " + man);
                 man.Delete();
