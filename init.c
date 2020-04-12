@@ -49,12 +49,57 @@ class CustomMission extends MissionServer
     static private int ROUND_DURATION = (20 * 60 * 1000);
     static private int COUNTDOWN_DURATION = (10 * 1000);
 
+    static private const vector LIMBO_POSITON = "7270.39 293.398 2923.94";
+    static private const vector PLAYAREA_CENTER = "7451 0 2732";
+    static private const int CLEANUP_RADIUS = 600;
+    static private const int KILL_RADIUS = 570;
+    static private const int PLAYAREA_RADIUS = 500;
+
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
     void CustomMission()
     {
+        GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
+                this.CheckPlayerPositions, 10000, true);
+
         this.StartRound();
+    }
+
+    private float DistanceFromCenter(vector pos)
+    {
+        vector adjusted = Vector(pos[0], 0, pos[2]);
+
+        return vector.Distance(PLAYAREA_CENTER, adjusted);
+    }
+
+    private void CheckPlayerPositions()
+    {
+        array<Man> players = new array<Man>();
+        GetGame().GetPlayers(players);
+        foreach (Man player : players)
+        {
+            if (player.IsAlive())
+            {
+                float distance = this.DistanceFromCenter(player.GetPosition());
+
+                if (distance > PLAYAREA_RADIUS)
+                {
+                    Print("Player " + player.GetIdentity().GetName() + " is too far away (" + distance + ")");
+                    NotificationSystem.SendNotificationToPlayerExtended(
+                            player, 5.0, "You are outside the zone!",
+                            "You will continue to lose health until you return to the zone.");
+                    if (distance > KILL_RADIUS)
+                    {
+                        player.SetHealth("", "", 0.0);
+                    }
+                    else
+                    {
+                        player.SetHealth("", "", player.GetHealth() - 33);
+                    }
+                }
+            }
+        }
     }
 
     private void EndRoundCountdown(int duration)
@@ -113,6 +158,11 @@ class CustomMission extends MissionServer
         this.EndRound();
     }
 
+    private void PutInLimbo(EntityAI entity)
+    {
+        entity.SetPosition(LIMBO_POSITON);
+    }
+
     private void KillAllPlayers()
     {
         array<Man> men = new array<Man>();
@@ -127,6 +177,7 @@ class CustomMission extends MissionServer
                 playerBase.ClearInventory();
                 playerBase.RemoveAllItems();
                 playerBase.SetHealth("", "", 0.0);
+                this.PutInLimbo(playerBase);
             }
         }
     }
@@ -134,18 +185,22 @@ class CustomMission extends MissionServer
     private void CleanupObjects()
     {
         Print("Cleaning up objects");
-        vector pos = "8000 0 8000";
+
+        CGame game = GetGame();
         array<Object> objects = new array<Object>();
         array<CargoBase> cargos = new array<CargoBase>();
         Print("Finding objects");
-        int start = GetGame().GetTime();
-        GetGame().GetObjectsAtPosition(pos, 11400, objects, cargos);
-        int end = GetGame().GetTime();
+        int start = game.GetTime();
+        game.GetObjectsAtPosition(
+                PLAYAREA_CENTER, CLEANUP_RADIUS, objects, cargos);
+        int end = game.GetTime();
         int delta = end - start;
         Print("Done finding objects");
         Print(" Start: " + start);
         Print(" End: " + end);
         Print(" Delta: " + delta);
+
+        Print(" Objects to check: " + objects.Count());
 
         foreach (Object obj : objects)
         {
@@ -169,6 +224,7 @@ class CustomMission extends MissionServer
                     Print("Stripping corpse " + player);
                     player.ClearInventory();
                     player.RemoveAllItems();
+                    this.PutInLimbo(player);
                 }
             }
         }
