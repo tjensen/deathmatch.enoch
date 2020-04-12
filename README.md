@@ -5,6 +5,8 @@ No client-side mods are required to play.
 
 * [Installation Instructions](#installation-instructions)
 * [Recommended Server Settings](#recommended-server-settings)
+* [Optional Server Settings](#optional-server-settings)
+  * [Round Duration](#round-duration)
 * [Design Requirements](#design-requirements)
 
 ## Installation Instructions
@@ -17,7 +19,8 @@ Steam Windows application, the `mpmissions` folder is typically located at:
 C:\Program Files (x86)\Steam\steamapps\common\DayZServer\mpmissions
 ```
 
-Edit the DayZ server configuration file (typically `serverDZ.cfg`) to load the `deathmatch.enoch` mission:
+Edit the DayZ server configuration file (typically `serverDZ.cfg`) to load the
+`deathmatch.enoch` mission:
 
 ```
 class Missions
@@ -38,6 +41,18 @@ time is recommended to avoid frustrating players with darkness. For example:
 serverTime="2020/4/1/08/00";
 serverTimeAcceleration=0;
 serverTimePersistent=0;
+```
+
+## Optional Server Settings
+
+### Round Duration
+
+The duration, in minutes, of each round can be changed by including a
+`deathmatchRoundMinutes` setting in the server configuartion file. For example,
+the following changes the duration to 45 minutes:
+
+```
+deathmatchRoundMinutes=45;
 ```
 
 ## Design Requirements
