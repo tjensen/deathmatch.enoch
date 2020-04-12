@@ -153,11 +153,20 @@ class CustomMission extends MissionServer
                 itemBase.Delete();
             }
 
-            Man man = Man.Cast(obj);
-            if (man != null && man.GetIdentity() == null)
+            PlayerBase player = PlayerBase.Cast(obj);
+            if (player != null)
             {
-                Print("Cleaning up corpse " + man);
-                man.Delete();
+                if (player.GetIdentity() == null)
+                {
+                    Print("Cleaning up corpse " + player);
+                    player.Delete();
+                }
+                else
+                {
+                    Print("Stripping corpse " + player);
+                    player.ClearInventory();
+                    player.RemoveAllItems();
+                }
             }
         }
         Print("Done cleaning up objects");
