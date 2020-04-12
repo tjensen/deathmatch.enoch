@@ -168,11 +168,16 @@ class Blaze extends FixedRangedWeapon
 }
 
 
-class Mosin extends FixedRangedWeapon
+class Mosin extends RandomRangedWeapon
 {
+    static private ref TStringArray Names = {
+        "Mosin9130", "Mosin9130_Black", "Mosin9130_Camo", "Mosin9130_Green"
+    };
+    static private ref TStringArray Optics = {"PUScopeOptic"};
+
     void Mosin()
     {
-        Init("Mosin9130", "Ammo_762x54", "PUScopeOptic");
+        Init(Names, "Ammo_762x54", Optics);
     }
 }
 
@@ -214,7 +219,7 @@ class UMP extends RandomRangedWeapon
 
 class M4A1 extends RandomRangedWeapon
 {
-    static private ref TStringArray Names = {"M4A1"};
+    static private ref TStringArray Names = {"M4A1", "M4A1_Black", "M4A1_Green"};
     static private ref TStringArray Optics = {"M68Optic", "M4_T3NRDSOptic", "ReflexOptic"};
     static private ref TStringArray Handguards = {
         "M4_MPHndgrd", "M4_PlasticHndgrd", "M4_RISHndgrd"
@@ -298,3 +303,5 @@ class Weapons
         return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
     }
 }
+
+// vim:ft=cs
