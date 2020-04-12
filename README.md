@@ -55,6 +55,8 @@ the following changes the duration to 45 minutes:
 deathmatchRoundMinutes=45;
 ```
 
+The default is 30 minutes.
+
 ## Design Requirements
 
 * Players do not need to install any mods
