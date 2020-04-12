@@ -22,8 +22,22 @@ class Clothes
         "WorkingBoots_Brown", "WorkingBoots_Green"
     };
     static private ref TStringArray Vests = {
-        "PressVest_Blue", "PressVest_LightBlue", "UKAssVest_Black", "UKAssVest_Camo",
-        "UKAssVest_Khaki", "UKAssVest_Olive"
+        "UKAssVest_Black", "UKAssVest_Camo", "UKAssVest_Khaki",
+        "UKAssVest_Olive", "SmershVest"
+    };
+    static private ref TStringArray Hats = {
+        "BeanieHat_Beige", "BeanieHat_Black", "BeanieHat_Blue", "BeanieHat_Brown",
+        "BeanieHat_Green", "BeanieHat_Grey", "BeanieHat_Pink", "BeanieHat_Red", "BoonieHat_Black",
+        "BoonieHat_Blue", "BoonieHat_DPM", "BoonieHat_Dubok","BoonieHat_Flecktran",
+        "BoonieHat_NavyBlue", "BoonieHat_Olive", "BoonieHat_Orange", "BoonieHat_Red",
+        "BoonieHat_Tan", "CowboyHat_Brown", "CowboyHat_black", "CowboyHat_darkBrown",
+        "CowboyHat_green", "OfficerHat", "BaseballCap_Beige", "BaseballCap_Blue",
+        "BaseballCap_Black", "BaseballCap_CMMG_Black", "BaseballCap_CMMG_Pink", "BaseballCap_Camo",
+        "BaseballCap_Olive", "BaseballCap_Pink", "BaseballCap_Red"
+    };
+    static private ref TStringArray Glasses = {
+        "AviatorGlasses", "DesignerGlasses", "SportGlasses_Black", "SportGlasses_Blue",
+        "SportGlasses_Green", "SportGlasses_Orange", "ThickFramesGlasses", "ThinFramesGlasses"
     };
     static private ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
 
@@ -34,7 +48,20 @@ class Clothes
         inventory.CreateInInventory(Bottoms.GetRandomElement());
         inventory.CreateInInventory(Shoes.GetRandomElement());
         inventory.CreateInInventory(Vests.GetRandomElement());
+
+        if (Math.RandomInt(0, 2))
+        {
+            inventory.CreateInInventory(Hats.GetRandomElement());
+        }
+
+        if (Math.RandomInt(0, 2))
+        {
+            inventory.CreateInInventory(Glasses.GetRandomElement());
+        }
+
         EntityAI belt = inventory.CreateInInventory(Belts.GetRandomElement());
         return belt.GetInventory().CreateAttachment("NylonKnifeSheath");
     }
 }
+
+// vim:ft=cs
