@@ -66,9 +66,11 @@ class CustomMission extends MissionServer
         else
         {
             int timeLeft = duration / 1000;
+            NotificationSystem.SendNotificationToPlayerIdentityExtended(
+                    null, 1.0, "Round ends in " + timeLeft + " seconds");
             Print("Ending round in " + timeLeft + " " + GetGame().GetTime());
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
-                    this.EndRoundCountdown, 1000, false, duration - 1000);
+                    this.EndRoundCountdown, 5000, false, duration - 5000);
         }
     }
 
