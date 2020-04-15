@@ -2,7 +2,7 @@
 <types>
     <type name="ACOGOptic">
         <nominal>12</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>1800</restock>
         <min>8</min>
         <quantmin>-1</quantmin>
@@ -302,7 +302,7 @@
     </type>
     <type name="AK_Suppressor">
         <nominal>5</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>14400</restock>
         <min>2</min>
         <quantmin>-1</quantmin>
@@ -1686,7 +1686,7 @@
     </type>
     <type name="BallisticHelmet_Black">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -1697,7 +1697,7 @@
     </type>
     <type name="BallisticHelmet_Green">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -1708,7 +1708,7 @@
     </type>
     <type name="BallisticHelmet_UN">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>1800</restock>
         <min>4</min>
         <quantmin>-1</quantmin>
@@ -2254,7 +2254,7 @@
     </type>
     <type name="BearTrap">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -4807,7 +4807,7 @@
     </type>
     <type name="FAL">
         <nominal>4</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
@@ -5069,7 +5069,7 @@
     </type>
     <type name="FlashGrenade">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -5686,7 +5686,7 @@
     </type>
     <type name="GorkaHelmet">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>600</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -7363,7 +7363,7 @@
     </type>
     <type name="ImprovisedSuppressor">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -7773,7 +7773,7 @@
     </type>
     <type name="LandMineTrap">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8254,7 +8254,7 @@
     </type>
     <type name="M18SmokeGrenade_Green">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8266,7 +8266,7 @@
     </type>
     <type name="M18SmokeGrenade_Purple">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8278,7 +8278,7 @@
     </type>
     <type name="M18SmokeGrenade_Red">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8290,7 +8290,7 @@
     </type>
     <type name="M18SmokeGrenade_White">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8302,7 +8302,7 @@
     </type>
     <type name="M18SmokeGrenade_Yellow">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -8535,7 +8535,7 @@
     </type>
     <type name="M67Grenade">
         <nominal>15</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -9341,7 +9341,7 @@
     </type>
     <type name="Mich2001Helmet">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -9872,7 +9872,7 @@
     </type>
     <type name="NBCGlovesGray">
         <nominal>4</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>2</min>
         <quantmin>-1</quantmin>
@@ -10055,7 +10055,7 @@
     </type>
     <type name="OMNOGloves_Brown">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -10070,7 +10070,7 @@
     </type>
     <type name="OMNOGloves_Gray">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -10155,7 +10155,7 @@
     </type>
     <type name="PSO1Optic">
         <nominal>15</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>1800</restock>
         <min>8</min>
         <quantmin>-1</quantmin>
@@ -10581,7 +10581,7 @@
     </type>
     <type name="PlateCarrierVest">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>2700</lifetime>
         <restock>0</restock>
         <min>4</min>
         <quantmin>-1</quantmin>
@@ -10691,7 +10691,7 @@
     </type>
     <type name="PoliceVest">
         <nominal>15</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -10778,7 +10778,7 @@
     </type>
     <type name="PressVest_Blue">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -10790,7 +10790,7 @@
     </type>
     <type name="PressVest_LightBlue">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -10996,7 +10996,7 @@
     </type>
     <type name="RDG2SmokeGrenade_Black">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -11009,7 +11009,7 @@
     </type>
     <type name="RDG2SmokeGrenade_White">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -11022,7 +11022,7 @@
     </type>
     <type name="RGD5Grenade">
         <nominal>15</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -11338,7 +11338,7 @@
     </type>
     <type name="SVD">
         <nominal>4</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>14400</restock>
         <min>2</min>
         <quantmin>-1</quantmin>
@@ -12828,7 +12828,7 @@
     </type>
     <type name="Ssh68Helmet">
         <nominal>20</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -12906,7 +12906,7 @@
     </type>
     <type name="SurgicalGloves_Blue">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -12918,7 +12918,7 @@
     </type>
     <type name="SurgicalGloves_Green">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -12930,7 +12930,7 @@
     </type>
     <type name="SurgicalGloves_LightBlue">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -12942,7 +12942,7 @@
     </type>
     <type name="SurgicalGloves_White">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -13204,7 +13204,7 @@
     </type>
     <type name="TacticalGloves_Beige">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -13216,7 +13216,7 @@
     </type>
     <type name="TacticalGloves_Black">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -13228,7 +13228,7 @@
     </type>
     <type name="TacticalGloves_Green">
         <nominal>8</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>3</min>
         <quantmin>-1</quantmin>
@@ -13871,7 +13871,7 @@
     </type>
     <type name="VSS">
         <nominal>3</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>10800</lifetime>
         <restock>7200</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
@@ -14466,7 +14466,7 @@
     </type>
     <type name="WorkingGloves_Beige">
         <nominal>20</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14479,7 +14479,7 @@
     </type>
     <type name="WorkingGloves_Black">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>
@@ -14492,7 +14492,7 @@
     </type>
     <type name="WorkingGloves_Brown">
         <nominal>20</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14505,7 +14505,7 @@
     </type>
     <type name="WorkingGloves_Yellow">
         <nominal>20</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14565,7 +14565,7 @@
     </type>
     <type name="ZSh3PilotHelmet">
         <nominal>15</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>5600</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
