@@ -353,18 +353,20 @@ class Weapons
     void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
     {
         HumanInventory inventory = player.GetHumanInventory();
-        EntityAI primary = EquipPrimaryWeaponInHands(inventory);
+        EntityAI primary = EquipPrimaryWeapon(inventory);
         EntityAI secondary = EquipSecondaryWeapon(inventory);
         EntityAI melee = EquipKnifeInSheath(sheath);
 
         player.SetQuickBarEntityShortcut(primary, 0);
         player.SetQuickBarEntityShortcut(secondary, 1);
         player.SetQuickBarEntityShortcut(melee, 2);
+
+        player.TakeEntityToHandsImpl(InventoryMode.SERVER, primary);
     }
 
-    private EntityAI EquipPrimaryWeaponInHands(HumanInventory inventory)
+    private EntityAI EquipPrimaryWeapon(HumanInventory inventory)
     {
-        return PrimaryWeapons.GetRandomElement().CreateInHands(inventory);
+        return PrimaryWeapons.GetRandomElement().CreateInInventory(inventory);
     }
 
     private EntityAI EquipSecondaryWeapon(HumanInventory inventory)
