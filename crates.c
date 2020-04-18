@@ -65,6 +65,7 @@ class Crates
         inventory.CreateInInventory("VSS");
 
         inventory.CreateInInventory("PSO1Optic");
+        inventory.CreateInInventory("Battery9V");
 
         Crates.SpawnEmptyMagazine(inventory, "Mag_VSS_10Rnd");
         Crates.SpawnEmptyMagazine(inventory, "Mag_VSS_10Rnd");
@@ -112,6 +113,7 @@ class Crates
         inventory.CreateInInventory("SVD");
 
         inventory.CreateInInventory("PSO1Optic");
+        inventory.CreateInInventory("Battery9V");
 
         inventory.CreateInInventory("AK_Suppressor");
 
