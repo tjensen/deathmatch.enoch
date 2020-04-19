@@ -323,6 +323,15 @@ class Vaiga extends FixedRangedWeapon
 }
 
 
+class CZ527 extends FixedRangedWeapon
+{
+    void CZ527()
+    {
+        Init("CZ527", "Mag_CZ527_5rnd", "HuntingOptic");
+    }
+}
+
+
 class Weapons
 {
     static private ref TStringArray Knives = {
@@ -348,6 +357,7 @@ class Weapons
         SecondaryWeapons.Insert(new Blaze());
         SecondaryWeapons.Insert(new Mosin());
         SecondaryWeapons.Insert(new SKS());
+        SecondaryWeapons.Insert(new CZ527());
     }
 
     void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
