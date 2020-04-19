@@ -1,9 +1,5 @@
 class Crates
 {
-    static private const vector WEAPON_CRATE_POS = "7332.09 295.65 2667.92";
-    static private const vector ARMOR_CRATE_POS = "7304.11 300.059 2850.14";
-    static private const vector TRAP_CRATE_POS = "7373.78 296.85 2570.04";
-
     static private ref TStringArray WEAPONS = {"VSS", "FAL", "SVD"};
 
     static private ref TStringArray FAL_BUTTSTOCKS = {
@@ -35,11 +31,46 @@ class Crates
         "RDG2SmokeGrenade_Black", "RDG2SmokeGrenade_White"
     };
 
+    static private ref TVectorArray m_positions = {
+        "7332.09 295.650 2667.92",  // on top of pipes by crater
+        "7304.11 300.059 2850.14",  // on top of red brick warehouse
+        "7373.78 296.850 2570.04",  // on white smokestack
+        "7356.93 292.834 2825.19",  // on red guardhouse by fallen smokestack
+        "7274.52 301.360 2951.12",  // on metal carport at north end of area
+        "7303.02 297.038 2916.59",  // on long shed by unenterable warehouse
+        "7313.10 293.887 2877.93",  // on pump house by pipes at north end
+        "7300.19 291.888 2835.65",  // on yellow container by red warehouse
+        "7346.53 282.017 2651.65",  // in cab of wrecked truck in crater
+        "7297.61 293.265 2574.91",  // on Livonia grey warehouse at SW corner
+        "7707.75 306.870 2725.75",  // on middle silo at Eastern edge
+        "7367.28 290.383 2622.74",  // on yellow guardhouse by crater
+        "7480.80 292.892 2515.61",  // on pipes by barracks
+    };
+    static private int m_crateIndex = 0;
+
     static void SpawnCrates(CGame game)
     {
+        Crates.InitializeCratePositions();
+
         Crates.SpawnWeaponCrate(game, WEAPONS.GetRandomElement());
         Crates.SpawnArmorCrate(game);
         Crates.SpawnTrapCrate(game);
+    }
+
+    static private void InitializeCratePositions()
+    {
+        m_crateIndex = 0;
+        for (int i = 0; i < m_positions.Count(); i++)
+        {
+            m_positions.SwapItems(i, m_positions.GetRandomIndex());
+        }
+    }
+
+    static private vector GetCratePosition()
+    {
+        vector pos = m_positions.Get(m_crateIndex);
+        m_crateIndex++;
+        return pos;
     }
 
     static private GameInventory SpawnCrate(CGame game, vector position)
@@ -128,7 +159,8 @@ class Crates
 
     static private void SpawnWeaponCrate(CGame game, string name)
     {
-        GameInventory inventory = Crates.SpawnCrate(game, WEAPON_CRATE_POS);
+        GameInventory inventory = Crates.SpawnCrate(
+                game, Crates.GetCratePosition());
 
         if (name == "VSS")
         {
@@ -146,7 +178,8 @@ class Crates
 
     static private void SpawnArmorCrate(CGame game)
     {
-        GameInventory inventory = Crates.SpawnCrate(game, ARMOR_CRATE_POS);
+        GameInventory inventory = Crates.SpawnCrate(
+                game, Crates.GetCratePosition());
 
         inventory.CreateInInventory(VESTS.GetRandomElement());
 
@@ -157,7 +190,8 @@ class Crates
 
     static private void SpawnTrapCrate(CGame game)
     {
-        GameInventory inventory = Crates.SpawnCrate(game, TRAP_CRATE_POS);
+        GameInventory inventory = Crates.SpawnCrate(
+                game, Crates.GetCratePosition());
 
         inventory.CreateInInventory(TRAPS.GetRandomElement());
         inventory.CreateInInventory(TRAPS.GetRandomElement());
