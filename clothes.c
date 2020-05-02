@@ -40,6 +40,7 @@ class Clothes
         "SportGlasses_Green", "SportGlasses_Orange", "ThickFramesGlasses", "ThinFramesGlasses"
     };
     static private ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
+    static private ref TStringArray PPE = {"NioshFaceMask", "SurgicalMask"};
 
     EntityAI EquipPlayerClothes(PlayerBase player)
     {
@@ -48,6 +49,7 @@ class Clothes
         inventory.CreateInInventory(Bottoms.GetRandomElement());
         inventory.CreateInInventory(Shoes.GetRandomElement());
         inventory.CreateInInventory(Vests.GetRandomElement());
+        inventory.CreateInInventory(PPE.GetRandomElement());
 
         if (Math.RandomInt(0, 2))
         {
