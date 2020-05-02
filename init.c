@@ -332,6 +332,51 @@ class CustomMission extends MissionServer
         // Kill character so that players start fresh every time they connect
         player.SetHealth("", "", 0.0);
     }
+
+    override bool InsertCorpse(Man player)
+    {
+        Print("InsertCorpse :: " + player);
+        PlayerIdentity identity = player.GetIdentity();
+        if (identity)
+        {
+            string name = identity.GetName();
+
+            KillerData data = player.m_KillerData;
+            if (data)
+            {
+                Man killerMan = Man.Cast(data.m_Killer);
+                PlayerIdentity killerIdentity;
+                if (killerMan) killerIdentity = killerMan.GetIdentity();
+                if (killerIdentity)
+                {
+                    string killer = killerIdentity.GetName();
+                    string message = killer + " killed " + name;
+
+                    if (data.m_KillerHiTheBrain)
+                    {
+                        message += " with a headshot";
+                    }
+
+                    if (data.m_MurderWeapon)
+                    {
+                        message += " using a " + data.m_MurderWeapon.GetDisplayName();
+                    }
+
+                    this.NotifyAllPlayers(message);
+                }
+                else
+                {
+                    this.NotifyAllPlayers(name + " was killed");
+                }
+            }
+            else
+            {
+                this.NotifyAllPlayers(name + " has died");
+            }
+        }
+
+        return super.InsertCorpse(player);
+    }
 };
 
 Mission CreateCustomMission(string path)
