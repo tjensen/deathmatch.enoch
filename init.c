@@ -55,6 +55,8 @@ class CustomMission extends MissionServer
     static private const int KILL_RADIUS = 570;
     static private const int PLAYAREA_RADIUS = 500;
 
+    autoptr TStringStringMap m_Identities = new TStringStringMap();
+
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
@@ -109,6 +111,13 @@ class CustomMission extends MissionServer
         }
     }
 
+    private void NotifyAllPlayers(string message)
+    {
+        // This should use chat messaging but, because chat is broken in v1.07, we're using
+        // NotificationSystem, instead.
+        NotificationSystem.SendNotificationToPlayerIdentityExtended(null, 1.0, message);
+    }
+
     private void EndRoundCountdown(int duration)
     {
         if (duration <= 0)
@@ -118,8 +127,7 @@ class CustomMission extends MissionServer
         else
         {
             int timeLeft = duration / 1000;
-            NotificationSystem.SendNotificationToPlayerIdentityExtended(
-                    null, 1.0, "Round ends in " + timeLeft + " seconds");
+            this.NotifyAllPlayers("Round ends in " + timeLeft + " seconds");
             Print("Ending round in " + timeLeft + " " + GetGame().GetTime());
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                     this.EndRoundCountdown, 5000, false, duration - 5000);
@@ -148,8 +156,7 @@ class CustomMission extends MissionServer
     {
         Print("Ending round");
 
-        NotificationSystem.SendNotificationToPlayerIdentityExtended(
-                null, 1.0, "The round has ended!");
+        this.NotifyAllPlayers("The round has ended!");
 
         this.KillAllPlayers();
 
@@ -275,6 +282,48 @@ class CustomMission extends MissionServer
         this.EquipPlayerForSurvival(player);
         weapons.EquipPlayerWeapons(player, sheath);
         this.StartFedAndWatered(player);
+    }
+
+    override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
+    {
+        Print("InvokeOnConnect :: " + player + " :: " + identity);
+
+        string uid = identity.GetId();
+
+        // Unfortunately, InvokeOnConnect gets called when players respawn, so we have to keep
+        // track of connects and disconnects in order to know if this is being called for a
+        // player's initial spawn.
+        if (!m_Identities.Contains(uid))
+        {
+            string name = identity.GetName();
+
+            m_Identities.Set(uid, name);
+
+            Print("Player connected: " + name);
+            this.NotifyAllPlayers(name + " has entered the arena");
+        }
+
+        Print("m_Identities.Count() == " + m_Identities.Count());
+
+        super.InvokeOnConnect(player, identity);
+    }
+
+    override void PlayerDisconnected(PlayerBase player, PlayerIdentity identity, string uid)
+    {
+        Print("PlayerDisconnected :: " + player + " :: " + identity + " :: " + uid);
+
+        string name;
+        if (m_Identities.Find(uid, name))
+        {
+            m_Identities.Remove(uid);
+
+            Print("Player disconnected: " + name);
+            this.NotifyAllPlayers(name + " has left the arena");
+        }
+
+        Print("m_Identities.Count() == " + m_Identities.Count());
+
+        super.PlayerDisconnected(player, identity, uid);
     }
 
     override void HandleBody(PlayerBase player)
