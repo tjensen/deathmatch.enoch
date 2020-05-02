@@ -350,19 +350,7 @@ class CustomMission extends MissionServer
                 if (killerIdentity)
                 {
                     string killer = killerIdentity.GetName();
-                    string message = killer + " killed " + name;
-
-                    if (data.m_KillerHiTheBrain)
-                    {
-                        message += " with a headshot";
-                    }
-
-                    if (data.m_MurderWeapon)
-                    {
-                        message += " using a " + data.m_MurderWeapon.GetDisplayName();
-                    }
-
-                    this.NotifyAllPlayers(message);
+                    this.NotifyAllPlayers(killer + " killed " + name);
                 }
                 else
                 {
