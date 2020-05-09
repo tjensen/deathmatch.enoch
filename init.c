@@ -61,6 +61,7 @@ class CustomMission extends MissionServer
     autoptr Weapons weapons = new Weapons();
 
     int m_round_duration;
+    bool m_round_ending = false;
 
     void CustomMission()
     {
@@ -138,6 +139,8 @@ class CustomMission extends MissionServer
     {
         Print("Starting round");
 
+        m_round_ending = false;
+
         CGame game = GetGame();
 
         int delay = (m_round_duration * 60000) - COUNTDOWN_DURATION_MS;
@@ -155,6 +158,8 @@ class CustomMission extends MissionServer
     private void EndRound()
     {
         Print("Ending round");
+
+        this.m_round_ending = true;
 
         this.NotifyAllPlayers("The round has ended!");
 
@@ -333,9 +338,8 @@ class CustomMission extends MissionServer
         player.SetHealth("", "", 0.0);
     }
 
-    override bool InsertCorpse(Man player)
+    void OnPlayerDeath(Man player)
     {
-        Print("InsertCorpse :: " + player);
         PlayerIdentity identity = player.GetIdentity();
         if (identity)
         {
@@ -361,6 +365,16 @@ class CustomMission extends MissionServer
             {
                 this.NotifyAllPlayers(name + " has died");
             }
+        }
+    }
+
+    override bool InsertCorpse(Man player)
+    {
+        Print("InsertCorpse :: " + player);
+
+        if (!m_round_ending)
+        {
+            this.OnPlayerDeath(player);
         }
 
         return super.InsertCorpse(player);
