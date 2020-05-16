@@ -117,6 +117,8 @@ class CustomMission extends MissionServer
         // This should use chat messaging but, because chat is broken in v1.07, we're using
         // NotificationSystem, instead.
         NotificationSystem.SendNotificationToPlayerIdentityExtended(null, 1.0, message);
+
+        Print(GetGame().GetTime().ToString() + " | NOTIFY | " + message);
     }
 
     private void EndRoundCountdown(int duration)
@@ -129,7 +131,6 @@ class CustomMission extends MissionServer
         {
             int timeLeft = duration / 1000;
             this.NotifyAllPlayers("Round ends in " + timeLeft + " seconds");
-            Print("Ending round in " + timeLeft + " " + GetGame().GetTime());
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                     this.EndRoundCountdown, 5000, false, duration - 5000);
         }
@@ -304,7 +305,6 @@ class CustomMission extends MissionServer
 
             m_Identities.Set(uid, name);
 
-            Print("Player connected: " + name);
             this.NotifyAllPlayers(name + " has entered the arena");
         }
 
@@ -322,7 +322,6 @@ class CustomMission extends MissionServer
         {
             m_Identities.Remove(uid);
 
-            Print("Player disconnected: " + name);
             this.NotifyAllPlayers(name + " has left the arena");
         }
 
