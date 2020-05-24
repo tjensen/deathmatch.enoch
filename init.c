@@ -337,8 +337,37 @@ class CustomMission extends MissionServer
         player.SetHealth("", "", 0.0);
     }
 
+    void DeglitchItemInHands(PlayerBase player, int remainingTries)
+    {
+        Print("DeglitchItemInHands | " + player + " | " + remainingTries);
+
+        ItemBase item = player.GetItemInHands();
+        if (item)
+        {
+            player.LocalReplaceItemInHandsWithNewElsewhere(
+                    new DestroyItemInCorpsesHandsAndCreateNewOnGndLambda(
+                        item, item.GetType(), player, false));
+
+            remainingTries--;
+            if (remainingTries > 0)
+            {
+                GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(
+                        this.DeglitchItemInHands, 500, false, player, remainingTries);
+            }
+        }
+    }
+
     void OnPlayerDeath(Man player)
     {
+        // Drop item in hands to prevent it from getting glitched -- based on work-around documented
+        // at https://feedback.bistudio.com/T145046
+        PlayerBase playerBase = PlayerBase.Cast(player);
+        if (playerBase)
+        {
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(
+                    this.DeglitchItemInHands, 500, false, playerBase, 3);
+        }
+
         PlayerIdentity identity = player.GetIdentity();
         if (identity)
         {
