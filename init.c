@@ -140,6 +140,12 @@ class CustomMission extends MissionServer
     {
         Print("Starting round");
 
+        Print("Players:");
+        for (int i = 0; i < m_Identities.Count(); i++)
+        {
+            Print("  | " + i + " | " + m_Identities.GetKey(i) + " | " + m_Identities.GetElement(i) + " |");
+        }
+
         m_round_ending = false;
 
         CGame game = GetGame();
