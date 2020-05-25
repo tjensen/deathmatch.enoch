@@ -60,18 +60,24 @@ class CustomMission extends MissionServer
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
+    int m_max_rounds = 0;
+    int m_num_rounds = 0;
+
     int m_round_duration;
     bool m_round_ending = false;
 
     void CustomMission()
     {
-        m_round_duration = GetGame().ServerConfigGetInt(
-                "deathmatchRoundMinutes");
+        CGame game = GetGame();
+
+        m_max_rounds = game.ServerConfigGetInt("maxRounds");
+        Print("Max Rounds: " + m_max_rounds);
+
+        m_round_duration = game.ServerConfigGetInt("deathmatchRoundMinutes");
         if (m_round_duration < 1) m_round_duration = DEFAULT_ROUND_DURATION;
         Print("Round duration: " + m_round_duration);
 
-        GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
-                this.CheckPlayerPositions, 10000, true);
+        game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
 
         this.StartRound();
     }
@@ -138,7 +144,9 @@ class CustomMission extends MissionServer
 
     private void StartRound()
     {
-        Print("Starting round");
+        m_num_rounds++;
+
+        Print("Starting round " + m_num_rounds);
 
         Print("Players:");
         for (int i = 0; i < m_Identities.Count(); i++)
@@ -170,10 +178,18 @@ class CustomMission extends MissionServer
 
         this.NotifyAllPlayers("The round has ended!");
 
-        this.KillAllPlayers();
+        if (m_max_rounds > 0 && m_num_rounds >= m_max_rounds)
+        {
+            Print("Max rounds reached -- requesting restart");
+            GetGame().RequestRestart(1);  // non-0 code might might encourage GSP to restart?
+        }
+        else
+        {
+            this.KillAllPlayers();
 
-        ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY);
-        queue.CallLater(this.CleanupObjects, 200, false);
+            ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY);
+            queue.CallLater(this.CleanupObjects, 200, false);
+        }
 
         Print("Done");
     }
