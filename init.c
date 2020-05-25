@@ -111,11 +111,11 @@ class CustomMission extends MissionServer
                             "You will continue to lose health until you return to the zone.");
                     if (distance > KILL_RADIUS)
                     {
-                        player.SetHealth("", "", 0.0);
+                        player.SetHealth(0.0);
                     }
                     else
                     {
-                        player.SetHealth("", "", player.GetHealth() - 33);
+                        player.SetHealth(player.GetHealth() - 33);
                     }
                 }
             }
@@ -226,6 +226,7 @@ class CustomMission extends MissionServer
     private void EndRound()
     {
         Print("Ending round");
+        CGame game = GetGame();
 
         this.m_round_ending = true;
 
@@ -233,16 +234,17 @@ class CustomMission extends MissionServer
 
         this.NotifyAllPlayers("The round has ended!", bestInfo);
 
+        this.KillAllPlayers();
+
+        ScriptCallQueue queue = game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
+
         if (m_max_rounds > 0 && m_num_rounds >= m_max_rounds)
         {
             Print("Max rounds reached -- requesting restart");
-            GetGame().RequestRestart(1);  // non-0 code might might encourage GSP to restart?
+            queue.CallLater(game.RequestRestart, 200, false, 1);  // non-0 encourages GSP restart?
         }
         else
         {
-            this.KillAllPlayers();
-
-            ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY);
             queue.CallLater(this.CleanupObjects, 200, false);
         }
 
@@ -272,9 +274,9 @@ class CustomMission extends MissionServer
                 Print("Killing player " + playerBase);
                 playerBase.ClearInventory();
                 playerBase.RemoveAllItems();
-                playerBase.SetHealth("", "", 0.0);
-                this.PutInLimbo(playerBase);
+                playerBase.SetHealth(0.0);
             }
+            this.PutInLimbo(man);
         }
     }
 
@@ -436,7 +438,7 @@ class CustomMission extends MissionServer
     {
         player.DropAllItems();
         // Kill character so that players start fresh every time they connect
-        player.SetHealth("", "", 0.0);
+        player.SetHealth(0.0);
     }
 
     void DeglitchItemInHands(PlayerBase player, int remainingTries)
