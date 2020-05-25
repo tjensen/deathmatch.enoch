@@ -132,7 +132,7 @@ class CustomMission extends MissionServer
 
         // This should use chat messaging but, because chat is broken in v1.07, we're using
         // NotificationSystem, instead.
-        NotificationSystem.SendNotificationToPlayerIdentityExtended(identity, 1.0, message);
+        NotificationSystem.SendNotificationToPlayerIdentityExtended(identity, 2.0, message);
 
         Print(now + " | NOTIFY | " + name + " (" + identity + ") | " + message);
     }
