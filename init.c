@@ -66,6 +66,9 @@ class CustomMission extends MissionServer
     int m_round_duration;
     bool m_round_ending = false;
 
+    autoptr map<PlayerIdentity, int> m_player_kills = new map<PlayerIdentity, int>();
+    autoptr map<PlayerIdentity, int> m_player_deaths = new map<PlayerIdentity, int>();
+
     void CustomMission()
     {
         CGame game = GetGame();
@@ -118,13 +121,25 @@ class CustomMission extends MissionServer
         }
     }
 
-    private void NotifyAllPlayers(string message)
+    private void NotifyPlayer(PlayerIdentity identity, string message)
     {
+        string now = GetGame().GetTime().ToString();
+        string name = "ALL";
+        if (identity)
+        {
+            name = identity.GetName();
+        }
+
         // This should use chat messaging but, because chat is broken in v1.07, we're using
         // NotificationSystem, instead.
-        NotificationSystem.SendNotificationToPlayerIdentityExtended(null, 1.0, message);
+        NotificationSystem.SendNotificationToPlayerIdentityExtended(identity, 1.0, message);
 
-        Print(GetGame().GetTime().ToString() + " | NOTIFY | " + message);
+        Print(now + " | NOTIFY | " + name + " (" + identity + ") | " + message);
+    }
+
+    private void NotifyAllPlayers(string message)
+    {
+        this.NotifyPlayer(null, message);
     }
 
     private void EndRoundCountdown(int duration)
@@ -156,6 +171,9 @@ class CustomMission extends MissionServer
 
         m_round_ending = false;
 
+        m_player_kills.Clear();
+        m_player_deaths.Clear();
+
         CGame game = GetGame();
 
         int delay = (m_round_duration * 60000) - COUNTDOWN_DURATION_MS;
@@ -170,6 +188,20 @@ class CustomMission extends MissionServer
         Print("Done");
     }
 
+    private void ReportPlayerStats()
+    {
+        array<PlayerIdentity> identities = new array<PlayerIdentity>();
+        GetGame().GetPlayerIndentities(identities);
+
+        for (int i = 0; i < identities.Count(); i++)
+        {
+            PlayerIdentity identity = identities.Get(i);
+            int kills = m_player_kills.Get(identity);
+            int deaths = m_player_deaths.Get(identity);
+            this.NotifyPlayer(identity, "Your K:D was " + kills + ":" + deaths);
+        }
+    }
+
     private void EndRound()
     {
         Print("Ending round");
@@ -177,6 +209,8 @@ class CustomMission extends MissionServer
         this.m_round_ending = true;
 
         this.NotifyAllPlayers("The round has ended!");
+
+        this.ReportPlayerStats();
 
         if (m_max_rounds > 0 && m_num_rounds >= m_max_rounds)
         {
@@ -393,6 +427,8 @@ class CustomMission extends MissionServer
         PlayerIdentity identity = player.GetIdentity();
         if (identity)
         {
+            m_player_deaths.Set(identity, m_player_deaths.Get(identity) + 1);
+
             string name = identity.GetName();
 
             KillerData data = player.m_KillerData;
@@ -403,6 +439,8 @@ class CustomMission extends MissionServer
                 if (killerMan) killerIdentity = killerMan.GetIdentity();
                 if (killerIdentity)
                 {
+                    m_player_kills.Set(killerIdentity, m_player_kills.Get(killerIdentity) + 1);
+
                     string killer = killerIdentity.GetName();
                     this.NotifyAllPlayers(killer + " killed " + name);
                 }
