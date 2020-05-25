@@ -64,6 +64,7 @@ class CustomMission extends MissionServer
     int m_num_rounds = 0;
 
     int m_round_duration;
+    int m_round_end;
     bool m_round_ending = false;
 
     autoptr map<PlayerIdentity, int> m_player_kills = new map<PlayerIdentity, int>();
@@ -176,6 +177,8 @@ class CustomMission extends MissionServer
         m_player_deaths.Clear();
 
         CGame game = GetGame();
+
+        m_round_end = game.GetTime() + (m_round_duration * 60000);
 
         int delay = (m_round_duration * 60000) - COUNTDOWN_DURATION_MS;
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
@@ -364,6 +367,29 @@ class CustomMission extends MissionServer
         this.StartFedAndWatered(player);
     }
 
+    private void ReportTimeLeftInRound(notnull PlayerIdentity identity)
+    {
+        int remaining = m_round_end - GetGame().GetTime();
+        string text;
+
+        if (remaining > 120000)
+        {
+            text = (remaining / 60000).ToString() + " minutes";
+        }
+        else if (remaining > 15000)
+        {
+            text = (remaining / 1000).ToString() + " seconds";
+        }
+        else
+        {
+            // We're about to show the 10-second countdown, so don't spam the user with extra
+            // notifications.
+            return;
+        }
+
+        this.NotifyPlayer(identity, "Time left in current round: " + text);
+    }
+
     override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
     {
         Print("InvokeOnConnect :: " + player + " :: " + identity);
@@ -380,6 +406,8 @@ class CustomMission extends MissionServer
             m_Identities.Set(uid, name);
 
             this.NotifyAllPlayers(name + " has entered the arena");
+
+            this.ReportTimeLeftInRound(identity);
         }
 
         Print("m_Identities.Count() == " + m_Identities.Count());
