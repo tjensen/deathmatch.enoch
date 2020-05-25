@@ -72,7 +72,7 @@
 
         <!-- centers for grids of spawn points -->
         <generator_posbubbles>
-            <!-- BEGIN: Industrial Area South-East of Nadbor -->
+            <!-- BEGIN: Siła Factory -->
             <pos x="7241.95" z="2991.17" />
             <pos x="7147.40" z="2895.84" />
             <pos x="7190.38" z="2777.07" />
@@ -89,7 +89,10 @@
             <pos x="7499.81" z="2744.72" />
             <pos x="7474.81" z="2961.48" />
             <pos x="7345.88" z="2969.29" />
-            <!-- END: Industrial Area South-East of Nadbor -->
+            <pos x="7679.37" z="2545.93" />
+            <pos x="7501.22" z="2751.44" />
+            <pos x="7495.43" z="2860.45" />
+            <!-- END: Siła Factory -->
         </generator_posbubbles>
     </fresh>
 </playerspawnpoints>
