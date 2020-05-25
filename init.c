@@ -121,7 +121,7 @@ class CustomMission extends MissionServer
         }
     }
 
-    private void NotifyPlayer(PlayerIdentity identity, string message)
+    private void NotifyPlayer(PlayerIdentity identity, string message, string details = "")
     {
         string now = GetGame().GetTime().ToString();
         string name = "ALL";
@@ -132,14 +132,15 @@ class CustomMission extends MissionServer
 
         // This should use chat messaging but, because chat is broken in v1.07, we're using
         // NotificationSystem, instead.
-        NotificationSystem.SendNotificationToPlayerIdentityExtended(identity, 2.0, message);
+        NotificationSystem.SendNotificationToPlayerIdentityExtended(
+                identity, 2.0, message, details);
 
-        Print(now + " | NOTIFY | " + name + " (" + identity + ") | " + message);
+        Print(now + " | NOTIFY | " + name + " (" + identity + ") | " + message + " | " + details);
     }
 
-    private void NotifyAllPlayers(string message)
+    private void NotifyAllPlayers(string message, string details = "")
     {
-        this.NotifyPlayer(null, message);
+        this.NotifyPlayer(null, message, details);
     }
 
     private void EndRoundCountdown(int duration)
@@ -188,10 +189,13 @@ class CustomMission extends MissionServer
         Print("Done");
     }
 
-    private void ReportPlayerStats()
+    private string ReportPlayerStats()
     {
         array<PlayerIdentity> identities = new array<PlayerIdentity>();
         GetGame().GetPlayerIndentities(identities);
+        string bestPlayer;
+        int bestKills = -1;
+        int bestDeaths = -1;
 
         for (int i = 0; i < identities.Count(); i++)
         {
@@ -199,7 +203,21 @@ class CustomMission extends MissionServer
             int kills = m_player_kills.Get(identity);
             int deaths = m_player_deaths.Get(identity);
             this.NotifyPlayer(identity, "Your K:D was " + kills + ":" + deaths);
+
+            if (kills > bestKills || ((kills == bestKills) && (deaths < bestDeaths)))
+            {
+                bestPlayer = identity.GetName();
+                bestKills = kills;
+                bestDeaths = deaths;
+            }
         }
+
+        if (bestPlayer != "")
+        {
+            return ("The top K:D was " + bestKills + ":" + bestDeaths + " by " + bestPlayer);
+        }
+
+        return "";
     }
 
     private void EndRound()
@@ -208,9 +226,9 @@ class CustomMission extends MissionServer
 
         this.m_round_ending = true;
 
-        this.NotifyAllPlayers("The round has ended!");
+        string bestInfo = this.ReportPlayerStats();
 
-        this.ReportPlayerStats();
+        this.NotifyAllPlayers("The round has ended!", bestInfo);
 
         if (m_max_rounds > 0 && m_num_rounds >= m_max_rounds)
         {
