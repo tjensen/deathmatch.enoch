@@ -347,6 +347,7 @@ class CustomMission extends MissionServer
         HumanInventory inventory = player.GetHumanInventory();
         EntityAI bandage = inventory.CreateInInventory("BandageDressing");
         inventory.CreateInInventory("SalineBagIV");
+        inventory.CreateInInventory("Morphine");
 
         player.SetQuickBarEntityShortcut(bandage, 3);
     }
