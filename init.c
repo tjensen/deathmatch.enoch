@@ -303,8 +303,6 @@ class CustomMission extends MissionServer
             if (playerBase != null)
             {
                 Print("Killing player " + playerBase);
-                playerBase.ClearInventory();
-                playerBase.RemoveAllItems();
                 playerBase.SetHealth(0.0);
             }
             this.PutInLimbo(man);
