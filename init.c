@@ -46,6 +46,25 @@ void main()
 
 class CustomMission extends MissionServer
 {
+    static private ref TStringArray SuicideReasons = {
+        " had a senior moment!",
+        " had a brain fart!",
+        " had an accident!",
+        " bought the farm!",
+        " took a dirt nap!",
+        " pined for the fjords!",
+        " kicked the bucket!",
+        " shuffled off this mortal coil!",
+        " is kaput!",
+        " took a permanent vacation!",
+        " paid the piper!",
+        " croaked!",
+        " flatlined!",
+        " is no more!",
+        " met an untimely end!",
+        " forgot to pay the brain bill!"
+    };
+
     static private int DEFAULT_ROUND_DURATION = 30;
     static private int COUNTDOWN_DURATION_MS = 10000;
 
@@ -447,28 +466,52 @@ class CustomMission extends MissionServer
 
             string name = identity.GetName();
 
+            string killTitle;
+            string killDetails;
+
             KillerData data = player.m_KillerData;
             if (data)
             {
                 Man killerMan = Man.Cast(data.m_Killer);
-                PlayerIdentity killerIdentity;
-                if (killerMan) killerIdentity = killerMan.GetIdentity();
-                if (killerIdentity)
+                if (player == killerMan)
                 {
-                    m_player_kills.Set(killerIdentity, m_player_kills.Get(killerIdentity) + 1);
-
-                    string killer = killerIdentity.GetName();
-                    this.NotifyAllPlayers(killer + " killed " + name);
+                    killTitle = name + SuicideReasons.GetRandomElement();
                 }
                 else
                 {
-                    this.NotifyAllPlayers(name + " was killed");
+                    PlayerIdentity killerIdentity;
+                    if (killerMan) killerIdentity = killerMan.GetIdentity();
+                    if (killerIdentity)
+                    {
+                        m_player_kills.Set(killerIdentity, m_player_kills.Get(killerIdentity) + 1);
+
+                        string killer = killerIdentity.GetName();
+                        killTitle = killer + " killed " + name;
+
+                        if (data.m_MurderWeapon)
+                        {
+                            killDetails = "using " + data.m_MurderWeapon.GetDisplayName();
+                        }
+
+                        float distance = vector.Distance(player.GetPosition(), killerMan.GetPosition());
+                        killDetails = killDetails + " from " + distance + "m";
+                    }
+                    else
+                    {
+                        killTitle = name + " was killed";
+                    }
                 }
             }
             else
             {
-                this.NotifyAllPlayers(name + " has died");
+                killTitle = name + " has died";
             }
+
+            this.NotifyAllPlayers(killTitle, killDetails);
+        }
+        else
+        {
+            Print("Someone (" + player + ") died but I don't know who that is");
         }
     }
 
