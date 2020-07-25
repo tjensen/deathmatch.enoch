@@ -57,6 +57,21 @@ deathmatchRoundMinutes=45;
 
 The default is 30 minutes.
 
+### Maximum Rounds
+
+The server can be configured to automatically terminate after a desired number
+of rounds using the `maxRounds` setting. By default, the server will never
+automatically terminate. To stop after every 4 rounds:
+
+```
+maxRounds=4;
+```
+
+This setting is intended to be used in conjunction with a script that
+automatically restarts the server after it exits. Game Server Providers usually
+handle this for you but self-hosting may require a batch file or PowerShell
+script.
+
 ## Design Requirements
 
 * Players do not need to install any mods
