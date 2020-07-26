@@ -1,5 +1,6 @@
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\clothes.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\crates.c"
+#include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\limbo.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\weapons.c"
 
 
@@ -275,11 +276,6 @@ class CustomMission extends MissionServer
         this.EndRound();
     }
 
-    private void PutInLimbo(EntityAI entity)
-    {
-        entity.SetPosition(LIMBO_POSITON);
-    }
-
     private void KillAllPlayers()
     {
         array<Man> men = new array<Man>();
@@ -293,7 +289,7 @@ class CustomMission extends MissionServer
                 Print("Killing player " + playerBase);
                 playerBase.SetHealth(0.0);
             }
-            this.PutInLimbo(man);
+            Limbo.PutInLimbo(man);
         }
     }
 
@@ -339,7 +335,7 @@ class CustomMission extends MissionServer
                     Print("Stripping corpse " + player);
                     player.ClearInventory();
                     player.RemoveAllItems();
-                    this.PutInLimbo(player);
+                    Limbo.PutInLimbo(player);
                 }
             }
         }
