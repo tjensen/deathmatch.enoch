@@ -7,6 +7,8 @@ No client-side mods are required to play.
 * [Recommended Server Settings](#recommended-server-settings)
 * [Optional Server Settings](#optional-server-settings)
   * [Round Duration](#round-duration)
+  * [Maximum Rounds](#maximum-rounds)
+  * [Infected Spawn Chance](#infected-spawn-chance)
 * [Design Requirements](#design-requirements)
 
 ## Installation Instructions
