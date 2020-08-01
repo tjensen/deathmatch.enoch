@@ -1,5 +1,6 @@
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\clothes.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\crates.c"
+#include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\infected.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\limbo.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\weapons.c"
 
@@ -209,7 +210,13 @@ class CustomMission extends MissionServer
 
         Crates.SpawnCrates(game);
 
-        Print("Done");
+        int infectedChance = game.ServerConfigGetInt("infectedChance");
+        if (infectedChance > 0 && Math.RandomInt(0, 100) < infectedChance)
+        {
+            Infected.Spawn(game, m_Identities.Count());
+        }
+
+        Print("Done starting round");
     }
 
     private string ReportPlayerStats()
@@ -268,7 +275,7 @@ class CustomMission extends MissionServer
             queue.CallLater(this.CleanupObjects, 200, false);
         }
 
-        Print("Done");
+        Print("Done ending round");
     }
 
     private void RestartRound()
@@ -320,6 +327,13 @@ class CustomMission extends MissionServer
             {
                 Print("Cleaning up object " + itemBase);
                 itemBase.Delete();
+            }
+
+            DayZCreature creature = DayZCreature.Cast(obj);
+            if (creature != null)
+            {
+                Print("Cleaning up " + creature);
+                creature.Delete();
             }
 
             PlayerBase player = PlayerBase.Cast(obj);

@@ -2,8 +2,8 @@
 <variables>
     <var name="AnimalMaxCount" type="0" value="200"/>
     <var name="CleanupAvoidance" type="0" value="0"/>
-    <var name="CleanupLifetimeDeadAnimal" type="0" value="1200"/>
-    <var name="CleanupLifetimeDeadInfected" type="0" value="330"/>
+    <var name="CleanupLifetimeDeadAnimal" type="0" value="300"/>
+    <var name="CleanupLifetimeDeadInfected" type="0" value="300"/>
     <var name="CleanupLifetimeDeadPlayer" type="0" value="300"/>
     <var name="CleanupLifetimeDefault" type="0" value="45"/>
     <var name="CleanupLifetimeLimit" type="0" value="50"/>
