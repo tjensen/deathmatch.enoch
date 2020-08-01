@@ -72,6 +72,17 @@ automatically restarts the server after it exits. Game Server Providers usually
 handle this for you but self-hosting may require a batch file or PowerShell
 script.
 
+### Infected Spawn Chance
+
+Infected can be configured to spawn as a percentage chance at the beginning of
+each round using the `infectedChance` setting. By default, infected have a 0%
+chance of spawning. To give infected a 50% chance of spawning at the beginning
+of each round:
+
+```
+infectedChance=50;
+```
+
 ## Design Requirements
 
 * Players do not need to install any mods
