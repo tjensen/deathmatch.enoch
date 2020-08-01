@@ -92,11 +92,11 @@ infectedChance=50;
 * Players spawn with full energy, hydration, blood, and health
 * Players spawn with a random selection of weapons and clothing
 * All players are equal; nobody gets extra privileges or special treatment
-* Three loot crates spawn at static locations at the start of the game, containing:
+* Three loot crates spawn at ~~static~~ random locations at the start of the game, containing:
   1. Highest-tier weapons
   2. Armor and gloves
   3. Grenades and traps
 * No random loot spawns in the world
-* No infected
-  * Perhaps this should be optional?
+* ~~No infected~~
+  * Configurable in the server settings
 * Dropped items and dead bodies despawn very quickly
