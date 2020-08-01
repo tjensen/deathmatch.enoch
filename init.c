@@ -482,8 +482,15 @@ class CustomMission extends MissionServer
             KillerData data = player.m_KillerData;
             if (data)
             {
+                Print("Player " + player + " was killed by " + data.m_Killer + " with a " + data.m_MurderWeapon);
+
                 Man killerMan = Man.Cast(data.m_Killer);
-                if (player == killerMan)
+                if (DayZInfected.Cast(data.m_MurderWeapon))
+                {
+                    killTitle = name + " was kissed by a zombie";
+                    killDetails = "and liked it!";
+                }
+                else if (player == killerMan)
                 {
                     killTitle = name + SuicideReasons.GetRandomElement();
                 }
@@ -514,6 +521,8 @@ class CustomMission extends MissionServer
             }
             else
             {
+                Print("Player " + player + " was killed without any killer data");
+
                 killTitle = name + " has died";
             }
 
