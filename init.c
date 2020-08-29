@@ -104,7 +104,7 @@ class CustomMission extends MissionServer
 
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
 
-        this.StartRound();
+        this.CleanupObjectsAndStartRound();
     }
 
     private void ReadSettings(CGame game)
@@ -300,7 +300,7 @@ class CustomMission extends MissionServer
         }
         else
         {
-            queue.CallLater(this.CleanupObjects, 200, false);
+            queue.CallLater(this.CleanupObjectsAndStartRound, 200, false);
         }
 
         Print("Done ending round");
@@ -382,6 +382,11 @@ class CustomMission extends MissionServer
             }
         }
         Print("Done cleaning up objects");
+    }
+
+    private void CleanupObjectsAndStartRound()
+    {
+        this.CleanupObjects();
 
         this.StartRound();
     }
