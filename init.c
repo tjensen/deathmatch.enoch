@@ -538,7 +538,7 @@ class CustomMission extends MissionServer
                             killDetails = "using " + data.m_MurderWeapon.GetDisplayName();
                         }
 
-                        float distance = vector.Distance(player.GetPosition(), killerMan.GetPosition());
+                        int distance = vector.Distance(player.GetPosition(), killerMan.GetPosition());
                         killDetails = killDetails + " from " + distance + "m";
                     }
                     else
