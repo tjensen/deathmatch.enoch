@@ -1,9 +1,5 @@
 class Infected
 {
-    static private const int MINIMUM = 25;
-    static private const int MAXIMUM = 100;
-    static private const int PLAYER_SCALE_FACTOR = 10;
-
     static private ref TVectorArray POSITIONS = {
         "7697.10 296.762 2744.83",
         "7693.67 296.762 2736.43",
@@ -215,17 +211,20 @@ class Infected
         "ZmbM_priestPopSkinny", "ZmbM_usSoldier_normal_Desert", "ZmbM_usSoldier_normal_Woodland"
     };
 
-    static void Spawn(CGame game, int playerCount)
+    static void Spawn(CGame game, int playerCount, int playerScaleFactor, int minimum, int maximum)
     {
-        int infectedCount = playerCount * PLAYER_SCALE_FACTOR;
-        if (infectedCount < MINIMUM) infectedCount = MINIMUM;
-        if (infectedCount > MAXIMUM) infectedCount = MAXIMUM;
+        int infectedCount = playerCount * playerScaleFactor;
+        if (infectedCount < minimum) infectedCount = minimum;
+        if (infectedCount > maximum) infectedCount = maximum;
 
         Print("Spawning " + infectedCount + " infected");
         for (int i = 0; i < infectedCount; i++)
         {
+            string infectedType = TYPES.GetRandomElement();
+            vector position = POSITIONS.GetRandomElement();
             game.CreateObject(
                     TYPES.GetRandomElement(), POSITIONS.GetRandomElement(), false, true, true);
+            Print("Spawned " + infectedType + " at " + position);
         }
         Print("Done spawning infected");
     }

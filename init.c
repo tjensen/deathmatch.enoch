@@ -84,6 +84,11 @@ class CustomMission extends MissionServer
     int m_max_rounds = 0;
     int m_num_rounds = 0;
 
+    int m_infected_chance = 0;
+    int m_infected_player_factor = 5;
+    int m_min_infected = 25;
+    int m_max_infected = 50;
+
     int m_round_duration;
     int m_round_end;
     bool m_round_ending = false;
@@ -95,6 +100,15 @@ class CustomMission extends MissionServer
     {
         CGame game = GetGame();
 
+        this.ReadSettings(game);
+
+        game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
+
+        this.StartRound();
+    }
+
+    private void ReadSettings(CGame game)
+    {
         m_max_rounds = game.ServerConfigGetInt("maxRounds");
         Print("Max Rounds: " + m_max_rounds);
 
@@ -102,9 +116,22 @@ class CustomMission extends MissionServer
         if (m_round_duration < 1) m_round_duration = DEFAULT_ROUND_DURATION;
         Print("Round duration: " + m_round_duration);
 
-        game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
+        m_infected_chance = game.ServerConfigGetInt("infectedChance");
+        if (m_infected_chance < 0) m_infected_chance = 0;
+        if (m_infected_chance > 100) m_infected_chance = 100;
+        Print("Infected chance: " + m_infected_chance);
 
-        this.StartRound();
+        m_infected_player_factor = game.ServerConfigGetInt("infectedPlayerFactor");
+        if (m_infected_player_factor < 1) m_infected_player_factor = 5;
+        Print("Infected player factor: " + m_infected_player_factor);
+
+        m_min_infected = game.ServerConfigGetInt("minimumInfected");
+        if (m_min_infected < 1) m_min_infected = 25;
+        Print("Minimum infected: " + m_min_infected);
+
+        m_max_infected = game.ServerConfigGetInt("maximumInfected");
+        if (m_max_infected < 1) m_max_infected = 50;
+        Print("Maximum infected: " + m_max_infected);
     }
 
     private float DistanceFromCenter(vector pos)
@@ -210,10 +237,11 @@ class CustomMission extends MissionServer
 
         Crates.SpawnCrates(game);
 
-        int infectedChance = game.ServerConfigGetInt("infectedChance");
-        if (infectedChance > 0 && Math.RandomInt(0, 100) < infectedChance)
+        if (m_infected_chance > 0 && Math.RandomInt(0, 100) < m_infected_chance)
         {
-            Infected.Spawn(game, m_Identities.Count());
+            Infected.Spawn(
+                    game, m_Identities.Count(), m_infected_player_factor, m_min_infected,
+                    m_max_infected);
         }
 
         Print("Done starting round");

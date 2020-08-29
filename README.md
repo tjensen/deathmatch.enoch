@@ -8,7 +8,7 @@ No client-side mods are required to play.
 * [Optional Server Settings](#optional-server-settings)
   * [Round Duration](#round-duration)
   * [Maximum Rounds](#maximum-rounds)
-  * [Infected Spawn Chance](#infected-spawn-chance)
+  * [Infected Spawning](#infected-spawning)
 * [Design Requirements](#design-requirements)
 
 ## Installation Instructions
@@ -74,7 +74,7 @@ automatically restarts the server after it exits. Game Server Providers usually
 handle this for you but self-hosting may require a batch file or PowerShell
 script.
 
-### Infected Spawn Chance
+### Infected Spawning
 
 Infected can be configured to spawn as a percentage chance at the beginning of
 each round using the `infectedChance` setting. By default, infected have a 0%
@@ -83,6 +83,22 @@ of each round:
 
 ```
 infectedChance=50;
+```
+
+The number of infected spawned per player can also be customized using the
+`infectedPlayerFactor` setting. By default, 5 infected are spawned for each
+player. For example:
+
+```
+infectedPlayerFactor=10;  // spawn 10 infected per player
+```
+
+The minimum and maximum number of infected to spawn is also configurable. The
+defaults are 25 and 50, respectively. For example:
+
+```
+minimumInfected=10;
+maximumInfected=80;
 ```
 
 ## Design Requirements
