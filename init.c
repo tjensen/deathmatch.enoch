@@ -478,7 +478,14 @@ class CustomMission extends MissionServer
             return;
         }
 
-        this.NotifyPlayer(identity, "Time left in current round: " + text);
+        if (m_cowboy_round)
+        {
+            this.NotifyPlayer(identity, "Cowboy round ends in " + text);
+        }
+        else
+        {
+            this.NotifyPlayer(identity, "Round ends in " + text);
+        }
     }
 
     override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
