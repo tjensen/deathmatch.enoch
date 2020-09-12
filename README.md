@@ -9,6 +9,7 @@ No client-side mods are required to play.
   * [Round Duration](#round-duration)
   * [Maximum Rounds](#maximum-rounds)
   * [Infected Spawning](#infected-spawning)
+  * [Cowboy Rounds](#cowboy-rounds)
 * [Design Requirements](#design-requirements)
 
 ## Installation Instructions
@@ -99,6 +100,17 @@ defaults are 25 and 50, respectively. For example:
 ```
 minimumInfected=10;
 maximumInfected=80;
+```
+
+### Cowboy Rounds
+
+Cowboy Rounds are special game rounds where all players spawn with revolvers,
+repeaters, and cowboy attire. By default, cowboy rounds are disabled but can be
+enabled through a percent chance using the `cowboyRoundChance` setting. For
+example, to give cowboy rounds a 33% chance of happening:
+
+```
+cowboyRoundChance=33;
 ```
 
 ## Design Requirements
