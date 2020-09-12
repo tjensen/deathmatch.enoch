@@ -42,9 +42,44 @@ class Clothes
     static private ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
     static private ref TStringArray PPE = {"NioshFaceMask", "SurgicalMask"};
 
-    EntityAI EquipPlayerClothes(PlayerBase player)
+    static private ref TStringArray CowboyTops = {
+        "Shirt_BlueCheck", "Shirt_BlueCheckBright", "Shirt_GreenCheck", "Shirt_RedCheck",
+        "Shirt_WhiteCheck"
+    };
+    static private ref TStringArray CowboyBottoms = {
+        "Jeans_Black", "Jeans_Brown", "Jeans_Green", "Jeans_Blue", "Jeans_BlueDark", "Jeans_Grey"
+    };
+    static private ref TStringArray CowboyShoes = {
+        "CombatBoots_Beige", "CombatBoots_Brown", "HikingBoots_Brown", "JungleBoots_Brown",
+        "MilitaryBoots_Brown", "Wellies_Brown", "WorkingBoots_Beige", "WorkingBoots_Brown"
+    };
+    static private ref TStringArray CowboyHats = {
+        "CowboyHat_Brown", "CowboyHat_black", "CowboyHat_darkBrown", "CowboyHat_green"
+    };
+    static private ref TStringArray CowboyMasks = {
+        "BandanaMask_BlackPattern", "BandanaMask_CamoPattern", "BandanaMask_GreenPattern",
+        "BandanaMask_PolkaPattern", "BandanaMask_RedPattern"
+    };
+
+    EntityAI EquipPlayerClothes(PlayerBase player, bool cowboy)
     {
         HumanInventory inventory = player.GetHumanInventory();
+
+        if (cowboy)
+        {
+            this.EquipCowboy(inventory);
+        }
+        else
+        {
+            this.EquipNormal(inventory);
+        }
+
+        EntityAI belt = inventory.CreateInInventory(Belts.GetRandomElement());
+        return belt.GetInventory().CreateAttachment("NylonKnifeSheath");
+    }
+
+    private void EquipNormal(HumanInventory inventory)
+    {
         inventory.CreateInInventory(Tops.GetRandomElement());
         inventory.CreateInInventory(Bottoms.GetRandomElement());
         inventory.CreateInInventory(Shoes.GetRandomElement());
@@ -60,9 +95,15 @@ class Clothes
         {
             inventory.CreateInInventory(Glasses.GetRandomElement());
         }
+    }
 
-        EntityAI belt = inventory.CreateInInventory(Belts.GetRandomElement());
-        return belt.GetInventory().CreateAttachment("NylonKnifeSheath");
+    private void EquipCowboy(HumanInventory inventory)
+    {
+        inventory.CreateInInventory(CowboyTops.GetRandomElement());
+        inventory.CreateInInventory(CowboyBottoms.GetRandomElement());
+        inventory.CreateInInventory(CowboyShoes.GetRandomElement());
+        inventory.CreateInInventory(CowboyMasks.GetRandomElement());
+        inventory.CreateInInventory(CowboyHats.GetRandomElement());
     }
 }
 

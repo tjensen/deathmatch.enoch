@@ -93,6 +93,9 @@ class CustomMission extends MissionServer
     int m_round_end;
     bool m_round_ending = false;
 
+    int m_cowboy_round_chance = 0;
+    bool m_cowboy_round = false;
+
     autoptr map<PlayerIdentity, int> m_player_kills = new map<PlayerIdentity, int>();
     autoptr map<PlayerIdentity, int> m_player_deaths = new map<PlayerIdentity, int>();
 
@@ -104,6 +107,7 @@ class CustomMission extends MissionServer
 
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
 
+        this.RollForCowboyRound();
         this.CleanupObjectsAndStartRound();
     }
 
@@ -132,6 +136,11 @@ class CustomMission extends MissionServer
         m_max_infected = game.ServerConfigGetInt("maximumInfected");
         if (m_max_infected < 1) m_max_infected = 50;
         Print("Maximum infected: " + m_max_infected);
+
+        m_cowboy_round_chance = game.ServerConfigGetInt("cowboyRoundChance");
+        if (m_cowboy_round_chance < 0) m_cowboy_round_chance = 0;
+        if (m_cowboy_round_chance > 100) m_cowboy_round_chance = 100;
+        Print("Cowboy round chance: " + m_cowboy_round_chance);
     }
 
     private float DistanceFromCenter(vector pos)
@@ -244,6 +253,11 @@ class CustomMission extends MissionServer
                     m_max_infected);
         }
 
+        if (m_cowboy_round)
+        {
+            this.NotifyAllPlayers("-=- COWBOY ROUND -=-", "Giddy-up, pardner!");
+        }
+
         Print("Done starting round");
     }
 
@@ -278,6 +292,19 @@ class CustomMission extends MissionServer
         return "";
     }
 
+    void RollForCowboyRound()
+    {
+        if (m_cowboy_round_chance > 0)
+        {
+            int roll = Math.RandomInt(0, 100);
+            m_cowboy_round = (roll < m_cowboy_round_chance);
+        }
+        else
+        {
+            m_cowboy_round = false;
+        }
+    }
+
     private void EndRound()
     {
         Print("Ending round");
@@ -300,6 +327,7 @@ class CustomMission extends MissionServer
         }
         else
         {
+            this.RollForCowboyRound();
             queue.CallLater(this.CleanupObjectsAndStartRound, 200, false);
         }
 
@@ -422,9 +450,9 @@ class CustomMission extends MissionServer
     {
         player.RemoveAllItems();
 
-        EntityAI sheath = clothes.EquipPlayerClothes(player);
+        EntityAI sheath = clothes.EquipPlayerClothes(player, m_cowboy_round);
         this.EquipPlayerForSurvival(player);
-        weapons.EquipPlayerWeapons(player, sheath);
+        weapons.EquipPlayerWeapons(player, sheath, m_cowboy_round);
         this.StartFedAndWatered(player);
     }
 

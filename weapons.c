@@ -360,12 +360,12 @@ class Weapons
         SecondaryWeapons.Insert(new CZ527());
     }
 
-    void EquipPlayerWeapons(PlayerBase player, EntityAI sheath)
+    void EquipPlayerWeapons(PlayerBase player, EntityAI sheath, bool cowboy)
     {
         HumanInventory inventory = player.GetHumanInventory();
-        EntityAI primary = EquipPrimaryWeapon(inventory);
-        EntityAI secondary = EquipSecondaryWeapon(inventory);
-        EntityAI melee = EquipKnifeInSheath(sheath);
+        EntityAI primary = EquipPrimaryWeapon(inventory, cowboy);
+        EntityAI secondary = EquipSecondaryWeapon(inventory, cowboy);
+        EntityAI melee = EquipKnifeInSheath(sheath, cowboy);
 
         player.SetQuickBarEntityShortcut(primary, 0);
         player.SetQuickBarEntityShortcut(secondary, 1);
@@ -374,19 +374,49 @@ class Weapons
         player.TakeEntityToHandsImpl(InventoryMode.SERVER, primary);
     }
 
-    private EntityAI EquipPrimaryWeapon(HumanInventory inventory)
+    private EntityAI EquipPrimaryWeapon(HumanInventory inventory, bool cowboy)
     {
-        return PrimaryWeapons.GetRandomElement().CreateInInventory(inventory);
+        if (cowboy)
+        {
+            EntityAI holster = inventory.CreateInInventory("ChestHolster");
+            EntityAI primary = holster.GetInventory().CreateAttachment("Magnum");
+            inventory.CreateInInventory("Ammo_357");
+            inventory.CreateInInventory("Ammo_357");
+            inventory.CreateInInventory("Ammo_357");
+            return primary;
+        }
+        else
+        {
+            return PrimaryWeapons.GetRandomElement().CreateInInventory(inventory);
+        }
     }
 
-    private EntityAI EquipSecondaryWeapon(HumanInventory inventory)
+    private EntityAI EquipSecondaryWeapon(HumanInventory inventory, bool cowboy)
     {
-        return SecondaryWeapons.GetRandomElement().CreateInInventory(inventory);
+        if (cowboy)
+        {
+            EntityAI secondary = inventory.CreateInInventory("Repeater");
+            inventory.CreateInInventory("Ammo_357");
+            inventory.CreateInInventory("Ammo_357");
+            inventory.CreateInInventory("Ammo_357");
+            return secondary;
+        }
+        else
+        {
+            return SecondaryWeapons.GetRandomElement().CreateInInventory(inventory);
+        }
     }
 
-    private EntityAI EquipKnifeInSheath(EntityAI sheath)
+    private EntityAI EquipKnifeInSheath(EntityAI sheath, bool cowboy)
     {
-        return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
+        if (cowboy)
+        {
+            return sheath.GetInventory().CreateAttachment("HuntingKnife");
+        }
+        else
+        {
+            return sheath.GetInventory().CreateAttachment(Knives.GetRandomElement());
+        }
     }
 }
 
