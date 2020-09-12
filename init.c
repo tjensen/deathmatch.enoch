@@ -244,7 +244,10 @@ class CustomMission extends MissionServer
                 false,
                 COUNTDOWN_DURATION_MS);
 
-        Crates.SpawnCrates(game);
+        if (!m_cowboy_round)
+        {
+            Crates.SpawnCrates(game);
+        }
 
         if (m_infected_chance > 0 && Math.RandomInt(0, 100) < m_infected_chance)
         {
