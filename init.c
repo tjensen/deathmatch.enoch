@@ -250,7 +250,7 @@ class CustomMission extends MissionServer
         {
             Infected.Spawn(
                     game, m_Identities.Count(), m_infected_player_factor, m_min_infected,
-                    m_max_infected);
+                    m_max_infected, m_cowboy_round);
         }
 
         if (m_cowboy_round)

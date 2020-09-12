@@ -210,8 +210,13 @@ class Infected
         "ZmbM_VillagerOld_Blue", "ZmbM_VillagerOld_Green", "ZmbM_VillagerOld_White",
         "ZmbM_priestPopSkinny", "ZmbM_usSoldier_normal_Desert", "ZmbM_usSoldier_normal_Woodland"
     };
+    static private ref TStringArray COWBOY_HATS = {
+        "CowboyHat_Brown", "CowboyHat_black", "CowboyHat_darkBrown", "CowboyHat_green"
+    };
 
-    static void Spawn(CGame game, int playerCount, int playerScaleFactor, int minimum, int maximum)
+    static void Spawn(
+            CGame game, int playerCount, int playerScaleFactor, int minimum, int maximum,
+            bool cowboy)
     {
         int infectedCount = playerCount * playerScaleFactor;
         if (infectedCount < minimum) infectedCount = minimum;
@@ -222,8 +227,13 @@ class Infected
         {
             string infectedType = TYPES.GetRandomElement();
             vector position = POSITIONS.GetRandomElement();
-            game.CreateObject(
+            Object infected = game.CreateObject(
                     TYPES.GetRandomElement(), POSITIONS.GetRandomElement(), false, true, true);
+            if (cowboy)
+            {
+                EntityAI.Cast(infected).GetInventory().CreateAttachment(
+                        COWBOY_HATS.GetRandomElement());
+            }
             Print("Spawned " + infectedType + " at " + position);
         }
         Print("Done spawning infected");
