@@ -255,7 +255,9 @@ class CustomMission extends MissionServer
 
         if (m_cowboy_round)
         {
-            this.NotifyAllPlayers("-=- COWBOY ROUND -=-", "Giddy-up, pardner!");
+            GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
+                    this.NotifyAllPlayers, 10000, false, "-=- COWBOY ROUND -=-",
+                    "Giddy-up, pardner!");
         }
 
         Print("Done starting round");
