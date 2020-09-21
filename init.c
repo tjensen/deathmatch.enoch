@@ -103,6 +103,9 @@ class CustomMission extends MissionServer
     {
         CGame game = GetGame();
 
+        // Throw away the first random number because it doesn't appear to be random
+        Math.RandomInt(0, 100);
+
         this.ReadSettings(game);
 
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
