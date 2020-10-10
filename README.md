@@ -163,7 +163,7 @@ example, to give cowboy rounds a 33% chance of happening:
 
 ### Kill Feed Webhook
 
-Is is possible to configure the server to send kill feed messages to a Discord
+It is possible to configure the server to send kill feed messages to a Discord
 channel using a webhook. Use your Discord server's settings to create a webhook
 URL for the channel you want kill feed messages to go to.
 
