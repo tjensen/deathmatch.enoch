@@ -177,8 +177,15 @@ class CustomMission extends MissionServer
         }
         else
         {
+            string detail;
+
+            if (m_num_rounds == m_settings.maxRounds)
+            {
+                detail = "Server will restart";
+            }
+
             int timeLeft = duration / 1000;
-            this.NotifyAllPlayers("Round ends in " + timeLeft + " seconds");
+            this.NotifyAllPlayers("Round ends in " + timeLeft + " seconds", detail);
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                     this.EndRoundCountdown, 5000, false, duration - 5000);
         }
