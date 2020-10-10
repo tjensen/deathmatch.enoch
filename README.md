@@ -10,6 +10,7 @@ No client-side mods are required to play.
   * [Maximum Rounds](#maximum-rounds)
   * [Infected Spawning](#infected-spawning)
   * [Cowboy Rounds](#cowboy-rounds)
+  * [Kill Feed Webhook](#kill-feed-webhook)
 * [Design Requirements](#design-requirements)
 
 ## Installation Instructions
@@ -48,14 +49,43 @@ serverTimePersistent=0;
 
 ## Optional Server Settings
 
+**Important: Optional server settings are no longer read from the server
+config file (e.g. `serverDZ.cfg`)**
+
+Optional deathmatch settings can be configured by creating a JSON file, named
+`deathmatch-settings.json`, in your server's profile directory.
+
+The following is an example file with all optional settings specified:
+
+```json
+{
+  "roundMinutes": 45,
+  "maxRounds": 4,
+  "infectedChance": 50,
+  "infectedPlayerFactor": 10,
+  "minimumInfected": 10,
+  "maximumInfected": 80,
+  "cowboyRoundChance": 33,
+  "killFeedWebhook": {
+    "type": "discord",
+    "url": "https://discordapp.com/api/webhooks/XXXXXXXX/YYYYYYYYYYYYYYYY"
+  }
+}
+```
+
+Note that it is only necessary to specify the settings whose defaults you want
+to override.
+
 ### Round Duration
 
 The duration, in minutes, of each round can be changed by including a
-`deathmatchRoundMinutes` setting in the server configuartion file. For example,
+`roundMinutes` setting in the `deathmatch-settings.json` file. For example,
 the following changes the duration to 45 minutes:
 
-```
-deathmatchRoundMinutes=45;
+```json
+{
+  "roundMinutes": 45
+}
 ```
 
 The default is 30 minutes.
@@ -66,8 +96,10 @@ The server can be configured to automatically terminate after a desired number
 of rounds using the `maxRounds` setting. By default, the server will never
 automatically terminate. To stop after every 4 rounds:
 
-```
-maxRounds=4;
+```json
+{
+  "maxRounds": 4
+}
 ```
 
 This setting is intended to be used in conjunction with a script that
@@ -82,25 +114,39 @@ each round using the `infectedChance` setting. By default, infected have a 0%
 chance of spawning. To give infected a 50% chance of spawning at the beginning
 of each round:
 
-```
-infectedChance=50;
+```json
+{
+  "infectedChance": 50
+}
 ```
 
 The number of infected spawned per player can also be customized using the
 `infectedPlayerFactor` setting. By default, 5 infected are spawned for each
-player. For example:
+player. For example, to spawn 10 infected per player:
 
-```
-infectedPlayerFactor=10;  // spawn 10 infected per player
+```json
+{
+  "infectedPlayerFactor": 10
+}
 ```
 
 The minimum and maximum number of infected to spawn is also configurable. The
 defaults are 25 and 50, respectively. For example:
 
+```json
+{
+  "minimumInfected": 10,
+  "maximumInfected": 80
+}
 ```
-minimumInfected=10;
-maximumInfected=80;
-```
+
+Note that the minimum and maximum infected counts will override the infected
+player factor. For example, if `maximumInfected` is 10, `infectedPlayerFactor`
+is 5, and there are 20 players on the server, no more than 10 infected will
+spawn.
+
+Also note that if `infectedChance` is 0, which is the default value, then
+infected will never spawn, regardless of how the other settings are configured.
 
 ### Cowboy Rounds
 
@@ -109,9 +155,31 @@ repeaters, and cowboy attire. By default, cowboy rounds are disabled but can be
 enabled through a percent chance using the `cowboyRoundChance` setting. For
 example, to give cowboy rounds a 33% chance of happening:
 
+```json
+{
+  "cowboyRoundChance": 33
+}
 ```
-cowboyRoundChance=33;
+
+### Kill Feed Webhook
+
+Is is possible to configure the server to send kill feed messages to a Discord
+channel using a webhook. Use your Discord server's settings to create a webhook
+URL for the channel you want kill feed messages to go to.
+
+A typical webhook configuration will look something like this:
+
+```json
+{
+  "killFeedWebhook": {
+    "type": "discord",
+    "url": "https://discordapp.com/api/webhooks/XXXXXXXX/YYYYYYYYYYYYYYYY"
+  }
+}
 ```
+
+Note that you **must** set the `type` to `discord` in order for the webhook
+to work. Other webhook types may be added in the future.
 
 ## Design Requirements
 
@@ -125,6 +193,6 @@ cowboyRoundChance=33;
   2. Armor and gloves
   3. Grenades and traps
 * No random loot spawns in the world
-* ~~No infected~~
+* ~~No~~ Optional infected spawning
   * Configurable in the server settings
 * Dropped items and dead bodies despawn very quickly
