@@ -44,6 +44,6 @@ class DeathmatchSettings : Managed
         if (this.cowboyRoundChance > 100) this.cowboyRoundChance = 100;
         Print("Cowboy round chance: " + this.cowboyRoundChance);
 
-        Print("Kill feed webhook: (" + this.killFeedWebhook.type + ") " + this.killFeedWebhook.url.Substring(0, 32) + "...");
+        Print("Kill feed webhook: " + this.killFeedWebhook.type + " (" + this.killFeedWebhook.url.Substring(0, this.killFeedWebhook.url.Length() / 4) + "...)");
     }
 }
