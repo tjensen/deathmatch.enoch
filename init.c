@@ -82,19 +82,11 @@ class CustomMission extends MissionServer
     autoptr Clothes clothes = new Clothes();
     autoptr Weapons weapons = new Weapons();
 
-    int m_max_rounds = 0;
     int m_num_rounds = 0;
 
-    int m_infected_chance = 0;
-    int m_infected_player_factor = 5;
-    int m_min_infected = 25;
-    int m_max_infected = 50;
-
-    int m_round_duration;
     int m_round_end;
     bool m_round_ending = false;
 
-    int m_cowboy_round_chance = 0;
     bool m_cowboy_round = false;
 
     autoptr DeathmatchSettings m_settings = new DeathmatchSettings();
@@ -111,46 +103,12 @@ class CustomMission extends MissionServer
         // Throw away the first random number because it doesn't appear to be random
         Math.RandomInt(0, 100);
 
-        this.ReadSettings(game);
+        m_settings.load();
 
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.CheckPlayerPositions, 10000, true);
 
         this.RollForCowboyRound();
         this.CleanupObjectsAndStartRound();
-    }
-
-    private void ReadSettings(CGame game)
-    {
-        m_settings.load();
-
-        m_max_rounds = game.ServerConfigGetInt("maxRounds");
-        Print("Max Rounds: " + m_max_rounds);
-
-        m_round_duration = game.ServerConfigGetInt("deathmatchRoundMinutes");
-        if (m_round_duration < 1) m_round_duration = DEFAULT_ROUND_DURATION;
-        Print("Round duration: " + m_round_duration);
-
-        m_infected_chance = game.ServerConfigGetInt("infectedChance");
-        if (m_infected_chance < 0) m_infected_chance = 0;
-        if (m_infected_chance > 100) m_infected_chance = 100;
-        Print("Infected chance: " + m_infected_chance);
-
-        m_infected_player_factor = game.ServerConfigGetInt("infectedPlayerFactor");
-        if (m_infected_player_factor < 1) m_infected_player_factor = 5;
-        Print("Infected player factor: " + m_infected_player_factor);
-
-        m_min_infected = game.ServerConfigGetInt("minimumInfected");
-        if (m_min_infected < 1) m_min_infected = 25;
-        Print("Minimum infected: " + m_min_infected);
-
-        m_max_infected = game.ServerConfigGetInt("maximumInfected");
-        if (m_max_infected < 1) m_max_infected = 50;
-        Print("Maximum infected: " + m_max_infected);
-
-        m_cowboy_round_chance = game.ServerConfigGetInt("cowboyRoundChance");
-        if (m_cowboy_round_chance < 0) m_cowboy_round_chance = 0;
-        if (m_cowboy_round_chance > 100) m_cowboy_round_chance = 100;
-        Print("Cowboy round chance: " + m_cowboy_round_chance);
     }
 
     private float DistanceFromCenter(vector pos)
@@ -245,9 +203,9 @@ class CustomMission extends MissionServer
 
         CGame game = GetGame();
 
-        m_round_end = game.GetTime() + (m_round_duration * 60000);
+        m_round_end = game.GetTime() + (m_settings.roundMinutes * 60000);
 
-        int delay = (m_round_duration * 60000) - COUNTDOWN_DURATION_MS;
+        int delay = (m_settings.roundMinutes * 60000) - COUNTDOWN_DURATION_MS;
         game.GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                 this.EndRoundCountdown,
                 delay,
@@ -259,11 +217,11 @@ class CustomMission extends MissionServer
             Crates.SpawnCrates(game);
         }
 
-        if (m_infected_chance > 0 && Math.RandomInt(0, 100) < m_infected_chance)
+        if (m_settings.infectedChance > 0 && Math.RandomInt(0, 100) < m_settings.infectedChance)
         {
             Infected.Spawn(
-                    game, m_Identities.Count(), m_infected_player_factor, m_min_infected,
-                    m_max_infected, m_cowboy_round);
+                    game, m_Identities.Count(), m_settings.infectedPlayerFactor,
+                    m_settings.minimumInfected, m_settings.maximumInfected, m_cowboy_round);
         }
 
         if (m_cowboy_round)
@@ -309,10 +267,10 @@ class CustomMission extends MissionServer
 
     void RollForCowboyRound()
     {
-        if (m_cowboy_round_chance > 0)
+        if (m_settings.cowboyRoundChance > 0)
         {
             int roll = Math.RandomInt(0, 100);
-            m_cowboy_round = (roll < m_cowboy_round_chance);
+            m_cowboy_round = (roll < m_settings.cowboyRoundChance);
         }
         else
         {
@@ -335,7 +293,7 @@ class CustomMission extends MissionServer
 
         ScriptCallQueue queue = game.GetCallQueue(CALL_CATEGORY_GAMEPLAY);
 
-        if (m_max_rounds > 0 && m_num_rounds >= m_max_rounds)
+        if (m_settings.maxRounds > 0 && m_num_rounds >= m_settings.maxRounds)
         {
             Print("Max rounds reached -- requesting restart");
             queue.CallLater(game.RequestRestart, 200, false, 1);  // non-0 encourages GSP restart?
