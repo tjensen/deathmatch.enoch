@@ -2,6 +2,7 @@
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\crates.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\infected.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\limbo.c"
+#include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\settings.c"
 #include "$CurrentDir:\\mpmissions\\deathmatch.enoch\\weapons.c"
 
 
@@ -96,11 +97,15 @@ class CustomMission extends MissionServer
     int m_cowboy_round_chance = 0;
     bool m_cowboy_round = false;
 
+    autoptr DeathmatchSettings m_settings = new DeathmatchSettings();
+
     autoptr map<PlayerIdentity, int> m_player_kills = new map<PlayerIdentity, int>();
     autoptr map<PlayerIdentity, int> m_player_deaths = new map<PlayerIdentity, int>();
 
     void CustomMission()
     {
+        CreateRestApi();
+
         CGame game = GetGame();
 
         // Throw away the first random number because it doesn't appear to be random
@@ -116,6 +121,8 @@ class CustomMission extends MissionServer
 
     private void ReadSettings(CGame game)
     {
+        m_settings.load();
+
         m_max_rounds = game.ServerConfigGetInt("maxRounds");
         Print("Max Rounds: " + m_max_rounds);
 
@@ -543,6 +550,26 @@ class CustomMission extends MissionServer
         player.SetHealth(0.0);
     }
 
+    void KillFeedMessage(string title, string detail)
+    {
+        this.NotifyAllPlayers(title, detail);
+
+        if (m_settings.killFeedWebhook.type == "discord")
+        {
+            JsonObject data = new JsonObject();
+            data.AddString("content", title + " " + detail);
+
+            RestCallback cbx = new RestCallback();
+            RestContext ctx = GetRestApi().GetRestContext(m_settings.killFeedWebhook.url);
+            ctx.SetHeader("application/json");
+            ctx.POST(cbx, "", data.GetJson());
+        }
+        else if (m_settings.killFeedWebhook.type != "")
+        {
+            Print(" !!! Unsupported webhook type: " + m_settings.killFeedWebhook.type);
+        }
+    }
+
     void OnPlayerDeath(Man player)
     {
         PlayerIdentity identity = player.GetIdentity();
@@ -602,7 +629,7 @@ class CustomMission extends MissionServer
                 killTitle = name + " has died";
             }
 
-            this.NotifyAllPlayers(killTitle, killDetails);
+            this.KillFeedMessage(killTitle, killDetails);
         }
         else
         {
