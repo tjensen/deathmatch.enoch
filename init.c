@@ -581,7 +581,7 @@ class CustomMission extends MissionServer
                             }
                             else
                             {
-                              killDetails = "using fists"
+                              killDetails = "using fists";
                             }
                         }
 
