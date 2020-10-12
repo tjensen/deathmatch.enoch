@@ -575,7 +575,14 @@ class CustomMission extends MissionServer
 
                         if (data.m_MurderWeapon)
                         {
-                            killDetails = "using " + data.m_MurderWeapon.GetDisplayName();
+                            if (data.m_MurderWeapon.GetDisplayName() != "Survivor")
+                            {
+                              killDetails = "using " + data.m_MurderWeapon.GetDisplayName();
+                            }
+                            else
+                            {
+                              killDetails = "using fists"
+                            }
                         }
 
                         int distance = vector.Distance(player.GetPosition(), killerMan.GetPosition());
