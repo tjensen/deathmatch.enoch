@@ -45,7 +45,7 @@ class CustomMission: MissionServer
 	{
 		if ( itemEnt )
 		{
-			float rndHlt = Math.RandomFloat( 0.25, 0.65 );
+			float rndHlt = Math.RandomFloat( 0.45, 0.65 );
 			itemEnt.SetHealth01( "", "", rndHlt );
 		}
 	}
@@ -90,8 +90,6 @@ class CustomMission: MissionServer
 			SetRandomHealth( itemClothing );
 		
 		itemClothing = player.FindAttachmentBySlotName( "Feet" );
-		if ( itemClothing )
-			SetRandomHealth( itemClothing );
 	}
 };
 

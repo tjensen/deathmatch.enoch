@@ -15550,8 +15550,7 @@
 						<point pos="-6.017823 0.330002 -8.809569" range="0.890625" height="2.000000" />
 				</container>
 		</group>
-		<!-- 1.07  Amusement Park Objects-->
-<!-- NOT INGAME - PREPARATION
+		<!-- 1.10 Truck01 wrecks -->
 		<group name="Land_Wreck_truck01_aban1_blue" >
 						<usage name="Village" />		
 						<usage name="Industrial" />		
@@ -15564,11 +15563,6 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
 		<group name="Land_Wreck_truck01_aban1_green" >
 						<usage name="Village" />		
@@ -15582,11 +15576,6 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
 		<group name="Land_Wreck_truck01_aban1_orange" >
 						<usage name="Village" />		
@@ -15600,11 +15589,6 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
 		<group name="Land_Wreck_truck01_aban2_blue" >
 						<usage name="Village" />		
@@ -15618,11 +15602,6 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
 		<group name="Land_Wreck_truck01_aban2_green" >
 						<usage name="Village" />		
@@ -15636,11 +15615,6 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
 		<group name="Land_Wreck_truck01_aban2_orange" >
 						<usage name="Village" />		
@@ -15654,12 +15628,8 @@
 							<category name="weapons" />
 							<category name="explosives" />
 						</container>
-						<dispatch>
-								<proxy type="HatchbackWheel" pos="0.78 -0.427 -1.155" rpy="90.0 0.0 45.0" />
-								<proxy type="HatchbackDoors_Driver" pos="0.767 0.787 -0.532" rpy="90.0 180.0 -90.0" />
-								<proxy type="HatchbackTrunk" pos="-0.054 0.163 1.516" rpy="90.0 180.0 -90.0" />
-						</dispatch>
 		</group>
+<!-- NOT INGAME - PREPARATION
 		<group name="Land_Wreck_truck02_aban1_green" >
 						<usage name="Village" />		
 						<usage name="Industrial" />		
