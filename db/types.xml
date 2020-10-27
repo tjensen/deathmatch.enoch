@@ -994,7 +994,7 @@
     </type>
     <type name="Ammo_Flare">
         <nominal>5</nominal>
-        <lifetime>14400</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>2</min>
         <quantmin>20</quantmin>
@@ -1010,7 +1010,7 @@
     </type>
     <type name="Ammo_FlareBlue">
         <nominal>5</nominal>
-        <lifetime>14400</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>2</min>
         <quantmin>20</quantmin>
@@ -1026,7 +1026,7 @@
     </type>
     <type name="Ammo_FlareGreen">
         <nominal>5</nominal>
-        <lifetime>14400</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>2</min>
         <quantmin>20</quantmin>
@@ -1042,7 +1042,7 @@
     </type>
     <type name="Ammo_FlareRed">
         <nominal>5</nominal>
-        <lifetime>14400</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>2</min>
         <quantmin>20</quantmin>
@@ -14539,7 +14539,7 @@
     </type>
     <type name="Truck_01_Covered">
         <nominal>0</nominal>
-        <lifetime>1800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14549,7 +14549,7 @@
     </type>
     <type name="Truck_01_Covered_Blue">
         <nominal>0</nominal>
-        <lifetime>1800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14559,7 +14559,7 @@
     </type>
     <type name="Truck_01_Covered_Orange">
         <nominal>0</nominal>
-        <lifetime>1800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14569,7 +14569,7 @@
     </type>
     <type name="Truck_01_Door_1_1">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14582,7 +14582,7 @@
     </type>
     <type name="Truck_01_Door_1_1_Blue">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14595,7 +14595,7 @@
     </type>
     <type name="Truck_01_Door_1_1_Orange">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14608,7 +14608,7 @@
     </type>
     <type name="Truck_01_Door_2_1">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14621,7 +14621,7 @@
     </type>
     <type name="Truck_01_Door_2_1_Blue">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14634,7 +14634,7 @@
     </type>
     <type name="Truck_01_Door_2_1_Orange">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14647,7 +14647,7 @@
     </type>
     <type name="Truck_01_Hood">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14660,7 +14660,7 @@
     </type>
     <type name="Truck_01_Hood_Blue">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14673,7 +14673,7 @@
     </type>
     <type name="Truck_01_Hood_Orange">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14686,7 +14686,7 @@
     </type>
     <type name="Truck_01_Wheel">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14699,7 +14699,7 @@
     </type>
     <type name="Truck_01_WheelDouble">
         <nominal>20</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -14712,7 +14712,7 @@
     </type>
     <type name="Truck_01_WheelDouble_Ruined">
         <nominal>0</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14725,7 +14725,7 @@
     </type>
     <type name="Truck_01_Wheel_Ruined">
         <nominal>0</nominal>
-        <lifetime>28800</lifetime>
+        <lifetime>300</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
