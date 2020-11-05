@@ -6287,6 +6287,7 @@
         <category name="food"/>
         <tag name="shelves"/>
         <usage name="Farm"/>
+        <value name="Tier1"/>
     </type>
     <type name="Guts">
         <nominal>0</nominal>
@@ -9230,6 +9231,7 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
         <category name="tools"/>
         <usage name="Farm"/>
+        <value name="Tier1"/>
     </type>
     <type name="MacrolepiotaMushroom">
         <nominal>0</nominal>
@@ -11504,6 +11506,7 @@
         <category name="food"/>
         <tag name="shelves"/>
         <usage name="Farm"/>
+        <value name="Tier1"/>
     </type>
     <type name="PowderedMilk">
         <nominal>15</nominal>
@@ -14335,6 +14338,7 @@
         <tag name="shelves"/>
         <usage name="Farm"/>
         <usage name="Village"/>
+        <value name="Tier1"/>
     </type>
     <type name="TomatoSeeds">
         <nominal>0</nominal>
@@ -14539,7 +14543,7 @@
     </type>
     <type name="Truck_01_Covered">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>3</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14549,7 +14553,7 @@
     </type>
     <type name="Truck_01_Covered_Blue">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>3</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -14559,7 +14563,7 @@
     </type>
     <type name="Truck_01_Covered_Orange">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>3</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -17297,6 +17301,7 @@
         <category name="food"/>
         <tag name="shelves"/>
         <usage name="Farm"/>
+        <value name="Tier1"/>
     </type>
     <type name="ZucchiniSeeds">
         <nominal>0</nominal>
