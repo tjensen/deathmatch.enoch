@@ -40,7 +40,7 @@ class Clothes
         "SportGlasses_Green", "SportGlasses_Orange", "ThickFramesGlasses", "ThinFramesGlasses"
     };
     static private ref TStringArray Belts = {"CivilianBelt", "MilitaryBelt"};
-    static private ref TStringArray PPE = {"NioshFaceMask", "SurgicalMask"};
+    static private ref TStringArray PPE = {"BandanaMask_PolkaPattern"};
 
     static private ref TStringArray CowboyTops = {
         "Shirt_BlueCheck", "Shirt_BlueCheckBright", "Shirt_GreenCheck", "Shirt_RedCheck",
@@ -56,10 +56,7 @@ class Clothes
     static private ref TStringArray CowboyHats = {
         "CowboyHat_Brown", "CowboyHat_black", "CowboyHat_darkBrown", "CowboyHat_green"
     };
-    static private ref TStringArray CowboyMasks = {
-        "BandanaMask_BlackPattern", "BandanaMask_CamoPattern", "BandanaMask_GreenPattern",
-        "BandanaMask_PolkaPattern", "BandanaMask_RedPattern"
-    };
+    static private ref TStringArray CowboyMasks = {"BandanaMask_PolkaPattern"};
 
     EntityAI EquipPlayerClothes(PlayerBase player, bool cowboy)
     {
