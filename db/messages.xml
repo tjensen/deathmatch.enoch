@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<messages>
+    <message>
+        <delay>1</delay>
+        <repeat>5</repeat>
+        <onconnect>1</onconnect>
+        <text>Go to: twitch.tv/thedaleplays</text>
+    </message>
+</messages>
