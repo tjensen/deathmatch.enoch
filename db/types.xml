@@ -302,7 +302,7 @@
     </type>
     <type name="AK_Suppressor">
         <nominal>5</nominal>
-        <lifetime>86400</lifetime>
+        <lifetime>14400</lifetime>
         <restock>14400</restock>
         <min>2</min>
         <quantmin>-1</quantmin>
@@ -7784,7 +7784,7 @@
     </type>
     <type name="ImprovisedSuppressor">
         <nominal>0</nominal>
-        <lifetime>86400</lifetime>
+        <lifetime>14400</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -8932,7 +8932,7 @@
     </type>
     <type name="M4_Suppressor">
         <nominal>5</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>14400</lifetime>
         <restock>14400</restock>
         <min>2</min>
         <quantmin>-1</quantmin>
@@ -11125,7 +11125,7 @@
     </type>
     <type name="PistolSuppressor">
         <nominal>10</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>14400</lifetime>
         <restock>0</restock>
         <min>5</min>
         <quantmin>-1</quantmin>

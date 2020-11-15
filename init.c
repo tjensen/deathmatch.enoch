@@ -248,8 +248,10 @@ class CustomMission extends MissionServer
             megaphone.CreateAttachment("Battery9V");
 
             GameInventory box2 = ItemBase.Cast(game.CreateObject("GiftBox_Large_2", "7348.07 287.052 2614.94", false, false, false)).GetInventory();
-            box2.CreateInInventory("SantasBeard");
-            box2.CreateInInventory("SantasHat");
+            box2.CreateInInventory("AK_Suppressor");
+            box2.CreateInInventory("M4_Suppressor");
+            box2.CreateInInventory("PistolSuppressor");
+            box2.CreateInInventory("ImprovisedSuppressor");
 
             GameInventory box3 = ItemBase.Cast(game.CreateObject("GiftBox_Large_3", "7343.07 287.052 2609.94", false, false, false)).GetInventory();
             box3.CreateInInventory("M18SmokeGrenade_Green");
@@ -264,8 +266,10 @@ class CustomMission extends MissionServer
             box3.CreateInInventory("M18SmokeGrenade_Red");
 
             GameInventory box4 = ItemBase.Cast(game.CreateObject("GiftBox_Large_4", "7343.07 287.052 2619.94", false, false, false)).GetInventory();
-            box4.CreateInInventory("MiniDress_RedChecker");
-            box4.CreateInInventory("Breeches_Red");
+            box4.CreateInInventory("AK_Suppressor");
+            box4.CreateInInventory("M4_Suppressor");
+            box4.CreateInInventory("PistolSuppressor");
+            box4.CreateInInventory("ImprovisedSuppressor");
         }
 
         Print("Done starting round");
