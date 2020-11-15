@@ -228,7 +228,8 @@ class CustomMission extends MissionServer
         {
             Infected.Spawn(
                     game, m_Identities.Count(), m_settings.infectedPlayerFactor,
-                    m_settings.minimumInfected, m_settings.maximumInfected, m_cowboy_round);
+                    m_settings.minimumInfected, m_settings.maximumInfected, m_settings.christmas,
+                    m_cowboy_round);
         }
 
         if (m_cowboy_round)
@@ -236,6 +237,35 @@ class CustomMission extends MissionServer
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(
                     this.NotifyAllPlayers, 10000, false, "-=- COWBOY ROUND -=-",
                     "Giddy-up, pardner!");
+        }
+
+        if (m_settings.christmas)
+        {
+            game.CreateObject("ChristmasTree_Green", "7343.07 287.052 2614.94", false, false, false);
+
+            GameInventory box1 = ItemBase.Cast(game.CreateObject("GiftBox_Large_1", "7338.07 287.052 2614.94", false, false, false)).GetInventory();
+            GameInventory megaphone = box1.CreateInInventory("Megaphone").GetInventory();
+            megaphone.CreateAttachment("Battery9V");
+
+            GameInventory box2 = ItemBase.Cast(game.CreateObject("GiftBox_Large_2", "7348.07 287.052 2614.94", false, false, false)).GetInventory();
+            box2.CreateInInventory("SantasBeard");
+            box2.CreateInInventory("SantasHat");
+
+            GameInventory box3 = ItemBase.Cast(game.CreateObject("GiftBox_Large_3", "7343.07 287.052 2609.94", false, false, false)).GetInventory();
+            box3.CreateInInventory("M18SmokeGrenade_Green");
+            box3.CreateInInventory("M18SmokeGrenade_Red");
+            box3.CreateInInventory("M18SmokeGrenade_Green");
+            box3.CreateInInventory("M18SmokeGrenade_Red");
+            box3.CreateInInventory("M18SmokeGrenade_Green");
+            box3.CreateInInventory("M18SmokeGrenade_Red");
+            box3.CreateInInventory("M18SmokeGrenade_Green");
+            box3.CreateInInventory("M18SmokeGrenade_Red");
+            box3.CreateInInventory("M18SmokeGrenade_Green");
+            box3.CreateInInventory("M18SmokeGrenade_Red");
+
+            GameInventory box4 = ItemBase.Cast(game.CreateObject("GiftBox_Large_4", "7343.07 287.052 2619.94", false, false, false)).GetInventory();
+            box4.CreateInInventory("MiniDress_RedChecker");
+            box4.CreateInInventory("Breeches_Red");
         }
 
         Print("Done starting round");
@@ -370,6 +400,13 @@ class CustomMission extends MissionServer
             {
                 Print("Cleaning up " + creature);
                 creature.Delete();
+            }
+
+            ChristmasTree_Green tree = ChristmasTree_Green.Cast(obj);
+            if (tree != null)
+            {
+                Print("Cleaning up " + tree);
+                tree.Delete();
             }
 
             PlayerBase player = PlayerBase.Cast(obj);

@@ -216,7 +216,7 @@ class Infected
 
     static void Spawn(
             CGame game, int playerCount, int playerScaleFactor, int minimum, int maximum,
-            bool cowboy)
+            bool christmas, bool cowboy)
     {
         int infectedCount = playerCount * playerScaleFactor;
         if (infectedCount < minimum) infectedCount = minimum;
@@ -232,6 +232,10 @@ class Infected
             {
                 EntityAI.Cast(infected).GetInventory().CreateAttachment(
                         COWBOY_HATS.GetRandomElement());
+            }
+            else if (christmas)
+            {
+                EntityAI.Cast(infected).GetInventory().CreateAttachment("SantasHat");
             }
             Print("Spawned " + infectedType + " at " + position);
         }

@@ -3451,7 +3451,7 @@
     </type>
     <type name="ChristmasTree_Green">
         <nominal>0</nominal>
-        <lifetime>3</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -5849,7 +5849,7 @@
     </type>
     <type name="GiftBox_Large_1">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -5862,7 +5862,7 @@
     </type>
     <type name="GiftBox_Large_2">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -5875,7 +5875,7 @@
     </type>
     <type name="GiftBox_Large_3">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -5888,7 +5888,7 @@
     </type>
     <type name="GiftBox_Large_4">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -9862,7 +9862,7 @@
     </type>
     <type name="Megaphone">
         <nominal>20</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>14400</lifetime>
         <restock>0</restock>
         <min>10</min>
         <quantmin>-1</quantmin>
@@ -12074,7 +12074,7 @@
     </type>
     <type name="SantasBeard">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>14400</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -12089,7 +12089,7 @@
     </type>
     <type name="SantasHat">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>14400</lifetime>
         <restock>0</restock>
         <min>0</min>
         <quantmin>-1</quantmin>
@@ -15457,7 +15457,7 @@
     </type>
     <type name="ZmbF_BlueCollarFat_Red">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
@@ -15797,7 +15797,7 @@
     </type>
     <type name="ZmbF_ParamedicNormal_Red">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
@@ -16097,7 +16097,7 @@
     </type>
     <type name="ZmbM_CitizenBFat_Red">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
@@ -16317,7 +16317,7 @@
     </type>
     <type name="ZmbM_FishermanOld_Red">
         <nominal>0</nominal>
-        <lifetime>300</lifetime>
+        <lifetime>7200</lifetime>
         <restock>0</restock>
         <min>1</min>
         <quantmin>-1</quantmin>
