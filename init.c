@@ -471,7 +471,7 @@ class CustomMission extends MissionServer
     {
         player.RemoveAllItems();
 
-        EntityAI sheath = clothes.EquipPlayerClothes(player, m_cowboy_round);
+        EntityAI sheath = clothes.EquipPlayerClothes(player, m_settings.christmas, m_cowboy_round);
         this.EquipPlayerForSurvival(player);
         weapons.EquipPlayerWeapons(player, sheath, m_cowboy_round);
         this.StartFedAndWatered(player);
