@@ -227,8 +227,7 @@ class Infected
         {
             string infectedType = TYPES.GetRandomElement();
             vector position = POSITIONS.GetRandomElement();
-            Object infected = game.CreateObject(
-                    TYPES.GetRandomElement(), POSITIONS.GetRandomElement(), false, true, true);
+            Object infected = game.CreateObject(infectedType, position, false, true, true);
             if (cowboy)
             {
                 EntityAI.Cast(infected).GetInventory().CreateAttachment(
