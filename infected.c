@@ -210,9 +210,27 @@ class Infected
         "ZmbM_VillagerOld_Blue", "ZmbM_VillagerOld_Green", "ZmbM_VillagerOld_White",
         "ZmbM_priestPopSkinny", "ZmbM_usSoldier_normal_Desert", "ZmbM_usSoldier_normal_Woodland"
     };
+    static private ref TStringArray CHRISTMAS_TYPES = {
+        "ZmbF_BlueCollarFat_Red", "ZmbF_Clerk_Normal_Red", "ZmbF_HikerSkinny_Red",
+        "ZmbF_JoggerSkinny_Red", "ZmbF_JournalistNormal_Red", "ZmbF_ParamedicNormal_Red",
+        "ZmbF_ShortSkirt_red", "ZmbF_SurvivorNormal_Red", "ZmbF_VillagerOld_Red",
+        "ZmbM_CitizenASkinny_Red", "ZmbM_CitizenBFat_Red", "ZmbM_FishermanOld_Red",
+        "ZmbM_HermitSkinny_Red", "ZmbM_JoggerSkinny_Red", "ZmbM_MechanicSkinny_Red",
+        "ZmbM_OffshoreWorker_Red"
+    };
     static private ref TStringArray COWBOY_HATS = {
         "CowboyHat_Brown", "CowboyHat_black", "CowboyHat_darkBrown", "CowboyHat_green"
     };
+
+    static string InfectedType(bool christmas)
+    {
+        if (christmas)
+        {
+            return CHRISTMAS_TYPES.GetRandomElement();
+        }
+
+        return TYPES.GetRandomElement();
+    }
 
     static void Spawn(
             CGame game, int playerCount, int playerScaleFactor, int minimum, int maximum,
@@ -225,7 +243,7 @@ class Infected
         Print("Spawning " + infectedCount + " infected");
         for (int i = 0; i < infectedCount; i++)
         {
-            string infectedType = TYPES.GetRandomElement();
+            string infectedType = InfectedType(christmas);
             vector position = POSITIONS.GetRandomElement();
             Object infected = game.CreateObject(infectedType, position, false, true, true);
             if (cowboy)
