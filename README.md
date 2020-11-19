@@ -47,6 +47,14 @@ serverTimeAcceleration=0;
 serverTimePersistent=0;
 ```
 
+Player characters are randomized, by design, so disabling the respawn dialog
+for selecting a custom character is also recommended to avoid confusing
+players:
+
+```
+disableRespawnDialog=1;
+```
+
 ## Optional Server Settings
 
 **Important: Optional server settings are no longer read from the server
