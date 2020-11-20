@@ -266,10 +266,12 @@ class CustomMission extends MissionServer
             box3.CreateInInventory("M18SmokeGrenade_Red");
 
             GameInventory box4 = ItemBase.Cast(game.CreateObject("GiftBox_Large_4", "7343.07 287.052 2619.94", false, false, false)).GetInventory();
-            box4.CreateInInventory("AK_Suppressor");
-            box4.CreateInInventory("M4_Suppressor");
-            box4.CreateInInventory("PistolSuppressor");
-            box4.CreateInInventory("ImprovisedSuppressor");
+            GameInventory deagle = box4.CreateInInventory("Deagle_Gold").GetInventory();
+            deagle.CreateAttachment("PistolOptic");
+            deagle.CreateAttachment("PistolSuppressor");
+            box4.CreateInInventory("Mag_Deagle_9rnd");
+            box4.CreateInInventory("Mag_Deagle_9rnd");
+            box4.CreateInInventory("Mag_Deagle_9rnd");
         }
 
         Print("Done starting round");
