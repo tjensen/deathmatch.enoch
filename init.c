@@ -337,7 +337,7 @@ class CustomMission extends MissionServer
         if (m_settings.maxRounds > 0 && m_num_rounds >= m_settings.maxRounds)
         {
             Print("Max rounds reached -- requesting restart");
-            queue.CallLater(game.RequestRestart, 200, false, 1);  // non-0 encourages GSP restart?
+            queue.CallLater(game.RequestExit, 200, false, 0);
         }
         else
         {
