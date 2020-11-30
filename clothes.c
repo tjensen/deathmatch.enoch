@@ -40,7 +40,7 @@ class Clothes
     static private ref TStringArray ChristmasShoes = {
         "AthleticShoes_Green", "JoggingShoes_Red", "JungleBoots_Green", "MilitaryBoots_Redpunk",
         "Sneakers_Green", "Sneakers_Red", "WorkingBoots_Green"
-    }
+    };
     static private ref TStringArray Vests = {
         "UKAssVest_Black", "UKAssVest_Camo", "UKAssVest_Khaki",
         "UKAssVest_Olive", "SmershVest"
