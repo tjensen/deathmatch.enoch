@@ -16,6 +16,8 @@ class DeathmatchSettings : Managed
 
     int cowboyRoundChance = 0;
 
+    int christmas = 0;
+
     ref Webhook killFeedWebhook = new Webhook();
 
     void load()
@@ -43,6 +45,8 @@ class DeathmatchSettings : Managed
         if (this.cowboyRoundChance < 0) this.cowboyRoundChance = 0;
         if (this.cowboyRoundChance > 100) this.cowboyRoundChance = 100;
         Print("Cowboy round chance: " + this.cowboyRoundChance);
+
+        Print("Christmas: " + this.christmas);
 
         Print("Kill feed webhook: " + this.killFeedWebhook.type + " (" + this.killFeedWebhook.url.Substring(0, this.killFeedWebhook.url.Length() / 4) + "...)");
     }
