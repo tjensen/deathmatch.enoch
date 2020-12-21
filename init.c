@@ -228,13 +228,7 @@ class CustomMission extends MissionServer
             Crates.SpawnCrates(game);
         }
 
-        if (m_settings.infectedChance > 0 && Math.RandomInt(0, 100) < m_settings.infectedChance)
-        {
-            Infected.Spawn(
-                    game, m_Identities.Count(), m_settings.infectedPlayerFactor,
-                    m_settings.minimumInfected, m_settings.maximumInfected, m_settings.christmas,
-                    m_cowboy_round);
-        }
+        Infected.Spawn(game, m_Identities.Count(), m_settings, m_cowboy_round);
 
         if (m_cowboy_round)
         {
