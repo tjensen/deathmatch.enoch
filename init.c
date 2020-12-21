@@ -71,7 +71,6 @@ class CustomMission extends MissionServer
     static private int DEFAULT_ROUND_DURATION = 30;
     static private int COUNTDOWN_DURATION_MS = 10000;
 
-    static private const vector LIMBO_POSITON = "7270.39 293.398 2923.94";
     static private const vector CHRISTMAS_TREE_POSITION = "7343.07 287.052 2614.94";
     static private const vector PLAYAREA_CENTER = "7451 0 2732";
     static private const int CLEANUP_RADIUS = 600;
