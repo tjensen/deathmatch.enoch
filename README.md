@@ -71,6 +71,7 @@ The following is an example file with all optional settings specified:
   "roundMinutes": 45,
   "maxRounds": 4,
   "infectedChance": 50,
+  "forceInfectedPlayerLimit": 2,
   "infectedPlayerFactor": 10,
   "minimumInfected": 10,
   "maximumInfected": 80,
@@ -127,6 +128,19 @@ of each round:
 ```json
 {
   "infectedChance": 50
+}
+```
+
+Servers can be configured to override the `infectedChance` setting to force
+infected to spawn when the number of players on the server is below the
+`forceInfectedPlayerLimit` setting. By default, the `forceInfectedPlayerLimit`
+is 0, meaning `infectedChance` controls whether infected spawn, regardless of
+how many players are on the server. To force the server to spawn infected
+whenever the server has less than 2 players:
+
+```json
+{
+  "forceInfectedPlayerLimit": 2
 }
 ```
 
