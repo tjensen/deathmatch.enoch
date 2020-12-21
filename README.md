@@ -10,6 +10,7 @@ No client-side mods are required to play.
   * [Maximum Rounds](#maximum-rounds)
   * [Infected Spawning](#infected-spawning)
   * [Cowboy Rounds](#cowboy-rounds)
+  * [Christmas](#christmas)
   * [Kill Feed Webhook](#kill-feed-webhook)
 * [Design Requirements](#design-requirements)
 
@@ -74,6 +75,7 @@ The following is an example file with all optional settings specified:
   "minimumInfected": 10,
   "maximumInfected": 80,
   "cowboyRoundChance": 33,
+  "christmas": 1,
   "killFeedWebhook": {
     "type": "discord",
     "url": "https://discordapp.com/api/webhooks/XXXXXXXX/YYYYYYYYYYYYYYYY"
@@ -166,6 +168,22 @@ example, to give cowboy rounds a 33% chance of happening:
 ```json
 {
   "cowboyRoundChance": 33
+}
+```
+
+### Christmas
+
+Enabling the Christmas event causes a large Christmas tree to spawn near the
+center of the arena, surrounded by 4 gift boxes containing festive loot. It
+also causes players to spawn with Santa hats, Santa beards, and clothing with
+holiday colors. Infected will also spawn with Santa hats.
+
+Setting `christmas` to `1` will enable the Christmas event. The default is `0`,
+which disables the event.
+
+```json
+{
+  "christmas": 1
 }
 ```
 
